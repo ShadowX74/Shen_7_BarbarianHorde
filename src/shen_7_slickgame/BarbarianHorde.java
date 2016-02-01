@@ -88,9 +88,6 @@ public class BarbarianHorde extends BasicGameState {
 	public static int counter = 0;
 
         static boolean hasKey;
-	// Player stuff
-
-	private Animation sprite, up, down, left, right, wait;
 
 	/**
 	 * 
@@ -108,6 +105,7 @@ public class BarbarianHorde extends BasicGameState {
 	private static final int SCREEN_WIDTH = 1000;
 
 	private static final int SCREEN_HEIGHT = 750;
+        Player playerguy;
 
 	public BarbarianHorde(int xSize, int ySize) {
 
@@ -120,7 +118,7 @@ public class BarbarianHorde extends BasicGameState {
 		 gc.setTargetFrameRate(60);
 
 		gc.setShowFPS(false);
-
+                playerguy = new Player();
 		// *******************
 
 		// Scenerey Stuff
@@ -131,130 +129,12 @@ public class BarbarianHorde extends BasicGameState {
 
 		// Ongoing checks are useful
 
-		System.out.println("Tile map is this wide: " + grassMap.getWidth());
+//		System.out.println("Tile map is this wide: " + grassMap.getWidth());
 
 		camera = new Camera(gc, grassMap);
 
-		// *********************************************************************************
-
-		// Player stuff --- these things should probably be chunked into methods
-		// and classes
-
-		// *********************************************************************************
-
-		SpriteSheet runningSS = new SpriteSheet("res/MyDungeon/travelersmall.png",32, 32, 0);
-
-		// System.out.println("Horizontal count: "
-		// +runningSS.getHorizontalCount());
-
-		// System.out.println("Vertical count: " +runningSS.getVerticalCount());
-
-		up = new Animation();
-
-		up.setAutoUpdate(true);
-
-		up.addFrame(runningSS.getSprite(0, 8), 330);
-
-		up.addFrame(runningSS.getSprite(1, 8), 330);
-
-		up.addFrame(runningSS.getSprite(2, 8), 330);
-
-		up.addFrame(runningSS.getSprite(3, 8), 330);
-
-		up.addFrame(runningSS.getSprite(4, 8), 330);
-
-		up.addFrame(runningSS.getSprite(5, 8), 330);
-
-		up.addFrame(runningSS.getSprite(6, 8), 330);
-
-		up.addFrame(runningSS.getSprite(7, 8), 330);
-
-		up.addFrame(runningSS.getSprite(8, 8), 330);
-
-		down = new Animation();
-
-		down.setAutoUpdate(false);
-
-		down.addFrame(runningSS.getSprite(0, 10), 330);
-
-		down.addFrame(runningSS.getSprite(1, 10), 330);
-
-		down.addFrame(runningSS.getSprite(2, 10), 330);
-
-		down.addFrame(runningSS.getSprite(3, 10), 330);
-
-		down.addFrame(runningSS.getSprite(4, 10), 330);
-
-		down.addFrame(runningSS.getSprite(5, 10), 330);
-
-		down.addFrame(runningSS.getSprite(6, 10), 330);
-
-		down.addFrame(runningSS.getSprite(7, 10), 330);
-
-		down.addFrame(runningSS.getSprite(8, 10), 330);
-
-		left = new Animation();
-
-		left.setAutoUpdate(false);
-
-		left.addFrame(runningSS.getSprite(0, 9), 330);
-
-		left.addFrame(runningSS.getSprite(1, 9), 330);
-
-		left.addFrame(runningSS.getSprite(2, 9), 330);
-
-		left.addFrame(runningSS.getSprite(3, 9), 330);
-
-		left.addFrame(runningSS.getSprite(4, 9), 330);
-
-		left.addFrame(runningSS.getSprite(5, 9), 330);
-
-		left.addFrame(runningSS.getSprite(6, 9), 330);
-
-		left.addFrame(runningSS.getSprite(7, 9), 330);
-
-		left.addFrame(runningSS.getSprite(8, 9), 330);
-
-		right = new Animation();
-
-		right.setAutoUpdate(false);
-
-		right.addFrame(runningSS.getSprite(0, 11), 330);
-
-		right.addFrame(runningSS.getSprite(1, 11), 330);
-
-		right.addFrame(runningSS.getSprite(2, 11), 330);
-
-		right.addFrame(runningSS.getSprite(3, 11), 330);
-
-		right.addFrame(runningSS.getSprite(4, 11), 330);
-
-		right.addFrame(runningSS.getSprite(5, 11), 330);
-
-		right.addFrame(runningSS.getSprite(6, 11), 330);
-
-		right.addFrame(runningSS.getSprite(7, 11), 330);
-
-		right.addFrame(runningSS.getSprite(8, 11), 330);
-
-		wait = new Animation();
-
-		wait.setAutoUpdate(true);
-
-		wait.addFrame(runningSS.getSprite(0, 14), 733);
-
-		wait.addFrame(runningSS.getSprite(1, 14), 733);
-
-		wait.addFrame(runningSS.getSprite(2, 14), 733);
-
-		wait.addFrame(runningSS.getSprite(3, 14), 733);
-
-		// wait.addFrame(runningSS.getSprite(2, 14), 733);
-
-		// wait.addFrame(runningSS.getSprite(5, 14), 333);
-
-		sprite = wait;
-
+                
+                
 		// *****************************************************************
 
 		// Obstacles etc.
@@ -275,8 +155,7 @@ public class BarbarianHorde extends BasicGameState {
 		// System.out.println("Number of tile layers: "
 		// +grassMap.getLayerCount());
 
-		System.out.println("The grassmap is " + grassMap.getWidth() + "by "
-				+ grassMap.getHeight());
+//		System.out.println("The grassmap is " + grassMap.getWidth() + "by "+ grassMap.getHeight());
 
 		for (int xAxis = 0; xAxis < grassMap.getWidth(); xAxis++) {
 
@@ -297,7 +176,7 @@ public class BarbarianHorde extends BasicGameState {
 
 				if ("true".equals(value)) {
 
-					System.out.println("The tile at x " + xAxis + " and y axis " + yAxis + " is blocked.");
+//					System.out.println("The tile at x " + xAxis + " and y axis " + yAxis + " is blocked.");
 
 					Blocked.blocked[xAxis][yAxis] = true;
 
@@ -307,7 +186,7 @@ public class BarbarianHorde extends BasicGameState {
 
 		}
 
-		System.out.println("Array length" + Blocked.blocked[0].length);
+//		System.out.println("Array length" + Blocked.blocked[0].length);
 
 		// A remarkably similar process for finding hostiles
 
@@ -379,9 +258,7 @@ public class BarbarianHorde extends BasicGameState {
 		stuffwin.add(ring);
 	}
 
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
-
-	throws SlickException {
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
 		camera.centerOn((int) Player.x, (int) Player.y);
 
@@ -395,7 +272,7 @@ public class BarbarianHorde extends BasicGameState {
 
 //		System.out.println("Current X: " + Player.x + " \n Current Y: "+ Player.y);
 
-		sprite.draw((int) Player.x, (int) Player.y);
+		playerguy.sprite.draw((int) Player.x, (int) Player.y);
 		
 //		g.drawString("x: " + (int)Player.x + "y: " +(int)Player.y , Player.x, Player.y - 10);
 
@@ -505,13 +382,13 @@ public class BarbarianHorde extends BasicGameState {
 
 		if (input.isKeyDown(Input.KEY_UP)) {
 
-			sprite = up;
+			playerguy.sprite = playerguy.up;
 
 			float fdsc = (float) (fdelta - (SIZE * .15));
 
 			if (!(isBlocked(Player.x, Player.y - fdelta) || isBlocked((float) (Player.x + SIZE + 1.5), Player.y - fdelta))) {
 
-				sprite.update(delta);
+				playerguy.sprite.update(delta);
 
 				// The lower the delta the slower the sprite will animate.
 
@@ -521,11 +398,11 @@ public class BarbarianHorde extends BasicGameState {
 
 		} else if (input.isKeyDown(Input.KEY_DOWN)) {
 
-			sprite = down;
+			playerguy.sprite = playerguy.down;
 
 			if (!isBlocked(Player.x, Player.y + SIZE + fdelta) && !isBlocked(Player.x + SIZE - 1, Player.y + SIZE + fdelta)) {
 
-				sprite.update(delta);
+				playerguy.sprite.update(delta);
 
 				Player.y += fdelta;
 
@@ -533,11 +410,11 @@ public class BarbarianHorde extends BasicGameState {
 
 		} else if (input.isKeyDown(Input.KEY_LEFT)) {
 
-			sprite = left;
+			playerguy.sprite = playerguy.left;
 
 			if (!(isBlocked(Player.x - fdelta, Player.y) || isBlocked(Player.x - fdelta, Player.y + SIZE - 1))) {
 
-				sprite.update(delta);
+				playerguy.sprite.update(delta);
 
 				Player.x -= fdelta;
 
@@ -545,7 +422,7 @@ public class BarbarianHorde extends BasicGameState {
 
 		} else if (input.isKeyDown(Input.KEY_RIGHT)) {
 
-			sprite = right;
+			playerguy.sprite = playerguy.right;
 
 			// the boolean-kludge-implementation
 
@@ -554,7 +431,7 @@ public class BarbarianHorde extends BasicGameState {
 
 					Player.y) || isBlocked(Player.x + SIZE + fdelta, Player.y + SIZE - 1)))) {
 
-				sprite.update(delta);
+				playerguy.sprite.update(delta);
 
 				Player.x += fdelta;
 
