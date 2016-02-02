@@ -146,13 +146,13 @@ public class Win extends BasicGameState {
 
             case Input.KEY_1:
 
-                Player.time  = 350000;
-                Player.speed = .4f;
-                Player.health = 100;
+                BarbarianHorde.playerguy.time  = 300000;
+                BarbarianHorde.playerguy.speed = .4f;
+                BarbarianHorde.playerguy.health = 100;
                 BarbarianHorde.counter = 0;
                 Itemwin.isvisible = true;
-                Player.x = 49f;
-                Player.y = 86f;
+                BarbarianHorde.playerguy.x = 49f;
+                BarbarianHorde.playerguy.y = 86f;
                 BarbarianHorde.SandBoss.isVisible = true;
                 BarbarianHorde.Boss.isVisible = true;
                 BarbarianHorde.Boss2.isVisible = true;
@@ -160,11 +160,7 @@ public class Win extends BasicGameState {
                 BarbarianHorde.key1.isvisible = true;
                 BarbarianHorde.gate1.isvisible = true;
                 BarbarianHorde.gate2.isvisible = true;
-                BarbarianHorde.hasKey = false;
-                
-                //item.isvisible = true;
-                //item1.isvisible = true;
-                Itemwin.isvisible = true;
+                BarbarianHorde.playerguy.hasKey = false;
                 game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 
 

@@ -22,12 +22,14 @@ public class Player {
 
 	public static float y = 86f;
 
-	public static int time = 350000;
+	public static int time = 300000;
 	
 	public static float speed = .4f;
         
         public static int health = 100;
 
+        public static boolean hasKey =  false;
+        
 	static float hitboxX = x + 4f;
 
 	static float hitboxY = y + 4f;
@@ -51,8 +53,7 @@ public class Player {
             
             SpriteSheet runningSS = new SpriteSheet("res/MyDungeon/travelersmall.png",32, 32, 0);
 
-		// System.out.println("Horizontal count: "
-		// +runningSS.getHorizontalCount());
+		// System.out.println("Horizontal count: "+runningSS.getHorizontalCount());
 
 		// System.out.println("Vertical count: " +runningSS.getVerticalCount());
 
