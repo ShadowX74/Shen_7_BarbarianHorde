@@ -126,7 +126,7 @@ public class Enemy {
         this.mydirection = Direction.WAIT;
 
 
-        SpriteSheet skeletonSS = new SpriteSheet("res/MyDungeon/evilmagespritesheet.png",64, 64, 0);
+        SpriteSheet skeletonSS = new SpriteSheet("res/evilmagespritesheet.png",64, 64, 0);
 
         skup = new Animation();
 

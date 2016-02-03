@@ -20,7 +20,7 @@ public class Money {
 	public boolean isvisible = true;
 	Image currentImage;
 	Shape hitbox;
-	Image coin = new Image("res/MyDungeon/crawl-tiles Oct-5-2010//item/misc/gold_pile.png");
+	Image coin = new Image("res/crawl-tiles Oct-5-2010//item/misc/gold_pile.png");
 
 	Money(int a, int b) throws SlickException {
 		this.x = a;

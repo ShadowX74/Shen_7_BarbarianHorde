@@ -51,7 +51,7 @@ public class Player {
         
         Player() throws SlickException{
             
-            SpriteSheet runningSS = new SpriteSheet("res/MyDungeon/travelersmall.png",32, 32, 0);
+            SpriteSheet runningSS = new SpriteSheet("res/travelersmall.png",32, 32, 0);
 
 		// System.out.println("Horizontal count: "+runningSS.getHorizontalCount());
 

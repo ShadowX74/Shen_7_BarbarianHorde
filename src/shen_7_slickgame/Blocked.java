@@ -11,13 +11,8 @@ package shen_7_slickgame;
  * @author ShadowX
  */
 public class Blocked {
-
-	public static boolean[][] blocked;
-
-	public static boolean[][] getblocked() {
-
-		return blocked;
-
-	}
-
+    public static boolean[][] blocked;
+    public static boolean[][] getblocked() {
+        return blocked;
+    }
 }

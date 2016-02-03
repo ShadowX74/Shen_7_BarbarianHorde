@@ -19,7 +19,7 @@ public class Lose extends BasicGameState {
     }
 
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-    	startimage = new Image("res/MyDungeon/Lose.png");
+    	startimage = new Image("res/Lose.png");
         this.game = game;
         // TODO AutoÃ¢â‚¬Âgenerated method stub
     }
@@ -81,13 +81,21 @@ public class Lose extends BasicGameState {
                 BarbarianHorde.playerguy.speed = .4f;
                 BarbarianHorde.playerguy.health = 100;
                 BarbarianHorde.counter = 0;
-                Itemwin.isvisible = true;
+                FinalRing.isvisible = true;
                 BarbarianHorde.playerguy.x = 49f;
                 BarbarianHorde.playerguy.y = 86f;
                 BarbarianHorde.SandBoss.isVisible = true;
+                BarbarianHorde.SandBoss.Bx = 1597;
+                BarbarianHorde.SandBoss.By = 2199;
                 BarbarianHorde.Boss.isVisible = true;
+                BarbarianHorde.Boss.Bx = 2800;
+                BarbarianHorde.Boss.By = 2135;
                 BarbarianHorde.Boss2.isVisible = true;
+                BarbarianHorde.Boss2.Bx = 2039;
+                BarbarianHorde.Boss2.By = 1500;
                 BarbarianHorde.MetalBoss.isVisible = true;
+                BarbarianHorde.MetalBoss.Bx = 2944;
+                BarbarianHorde.MetalBoss.By = 1400;
                 BarbarianHorde.key1.isvisible = true;
                 BarbarianHorde.gate1.isvisible = true;
                 BarbarianHorde.gate2.isvisible = true;

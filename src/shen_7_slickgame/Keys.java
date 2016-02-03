@@ -20,7 +20,7 @@ public class Keys {
 	public boolean isvisible = true;
 	Image currentImage;
 	Shape hitbox;
-	Image key = new Image("res/MyDungeon/crawl-tiles Oct-5-2010/UNUSED/other/key.png");
+	Image key = new Image("res/crawl-tiles Oct-5-2010/UNUSED/other/key.png");
         
 	Keys(int a, int b) throws SlickException {
 		this.x = a;

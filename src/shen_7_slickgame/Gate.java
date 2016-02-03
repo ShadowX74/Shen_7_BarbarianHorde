@@ -20,7 +20,7 @@ public class Gate {
 	public boolean isvisible = true;
 	Image currentImage;
 	Shape hitbox;
-	Image door = new Image("res/MyDungeon/crawl-tiles Oct-5-2010/dc-dngn/gateways/dngn_enter_gehenna.png");
+	Image door = new Image("res/crawl-tiles Oct-5-2010/dc-dngn/gateways/dngn_enter_gehenna.png");
 
 	Gate(int a, int b) throws SlickException {
 		this.x = a;
