@@ -152,9 +152,12 @@ public class BarbarianHorde extends BasicGameState {
 		playerguy.x += fdelta;
             }
 	} else if (input.isKeyDown(Input.KEY_SPACE)) {
-            orb1.setIsVisible(true);
             orb1.setX((int) playerguy.x);
             orb1.setY((int) playerguy.y);
+            orb1.hitbox.setX(orb1.getX());
+            orb1.hitbox.setY(orb1.getY());
+            orb1.setIsVisible(!orb1.isIsVisible());
+            orb1.setIsVisible(true);
         }
         
 	playerguy.rect.setLocation(playerguy.getplayershitboxX(),
@@ -194,7 +197,12 @@ public class BarbarianHorde extends BasicGameState {
 		}
             }
 	}
-		 
+        
+        for (Enemy e: bosses) {
+            if (orb1.hitbox.intersects(e.rect)) {
+                e.isVisible= false;
+            }
+        }
 	playerguy.time -= counter/1000;
 	if(playerguy.time <= 0 || playerguy.health <= 0){
             sbg.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
