@@ -1,4 +1,4 @@
-package shen_7_slickgame;
+package shen_7_barbarianhorde;
 
 import java.util.ArrayList;
 import org.newdawn.slick.Color;
@@ -15,6 +15,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class BarbarianHorde extends BasicGameState {
     public FinalRing ring;
+    public Orb orb1;
     static public Keys key1;
     static public Enemy MetalBoss, SandBoss, Boss, Boss2;
     static public Gate gate1, gate2;
@@ -56,6 +57,8 @@ public class BarbarianHorde extends BasicGameState {
             }
 	}
 
+        orb1 = new Orb((int) Player.x + 5, (int) Player.y - 10);
+        
         gate1 = new Gate(1600,1950);
         gate2 = new Gate(1632,1950);
         gates.add(gate1);
@@ -85,6 +88,9 @@ public class BarbarianHorde extends BasicGameState {
 	g.drawString("Time Left: " + playerguy.time/1000, camera.cameraX + 10, camera.cameraY + 10);
 	g.drawString("Health: " + (int)(playerguy.health), camera.cameraX + 10, camera.cameraY + 25);
 
+        if (orb1.isIsVisible()) {
+            orb1.orbpic.draw(orb1.getX(), orb1.getY());
+        }
         for (Gate d : gates) {
             if (d.isvisible) {
                 d.currentImage.draw(d.x, d.y);
@@ -145,7 +151,11 @@ public class BarbarianHorde extends BasicGameState {
 		playerguy.sprite.update(delta);
 		playerguy.x += fdelta;
             }
-	}
+	} else if (input.isKeyDown(Input.KEY_SPACE)) {
+            orb1.setIsVisible(true);
+            orb1.setX((int) playerguy.x);
+            orb1.setY((int) playerguy.y);
+        }
         
 	playerguy.rect.setLocation(playerguy.getplayershitboxX(),
 	playerguy.getplayershitboxY());

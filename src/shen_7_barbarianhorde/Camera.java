@@ -1,12 +1,8 @@
-package shen_7_slickgame;
-
+package shen_7_barbarianhorde;
 
 import org.newdawn.slick.GameContainer;
-
 import org.newdawn.slick.geom.Shape;
-
 import org.newdawn.slick.tiled.TiledMap;
-
 
 public class Camera {
     protected TiledMap map;
@@ -52,10 +48,10 @@ public class Camera {
     }
 
     public void drawMap(int offsetX, int offsetY) {
-       int tileOffsetX = (int) - (cameraX % tileWidth);
-       int tileOffsetY = (int) - (cameraY % tileHeight);
-       int tileIndexX = (int) (cameraX / tileWidth);
-       int tileIndexY = (int) (cameraY / tileHeight);
+        int tileOffsetX = (int) - (cameraX % tileWidth);
+        int tileOffsetY = (int) - (cameraY % tileHeight);
+        int tileIndexX = (int) (cameraX / tileWidth);
+        int tileIndexY = (int) (cameraY / tileHeight);
 
         map.render(  
             tileOffsetX + offsetX,
@@ -64,42 +60,15 @@ public class Camera {
             tileIndexY,
             (gc.getWidth()  - tileOffsetX) / tileWidth  + 1,
             (gc.getHeight() - tileOffsetY) / tileHeight + 1);
-   }
+    }
 
-  
+    public void translateGraphics() {
+        gc.getGraphics().translate(-cameraX, -cameraY);
+    }
 
-   /**
-
-    * Translates the Graphics-context to the coordinates of the map -
-
-now everything
-
-    * can be drawn with it's NATURAL coordinates.
-
-    */
-
-   public void translateGraphics() {
-
-      gc.getGraphics().translate(-cameraX, -cameraY);
-
-   }
-
-   /**
-
-    * Reverses the Graphics-translation of Camera.translatesGraphics().
-
-    * Call this before drawing HUD-elements or the like
-
-    */
-
-   public void untranslateGraphics() {
-
-      gc.getGraphics().translate(cameraX, cameraY);
-
-   }
-
-  
-
+    public void untranslateGraphics() {
+        gc.getGraphics().translate(cameraX, cameraY);
+    }
 }
 
 

@@ -1,4 +1,4 @@
-package shen_7_slickgame;
+package shen_7_barbarianhorde;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;

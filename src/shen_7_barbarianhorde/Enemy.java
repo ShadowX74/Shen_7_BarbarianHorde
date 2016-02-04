@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package shen_7_slickgame;
+package shen_7_barbarianhorde;
 
 import org.newdawn.slick.Animation;
 
