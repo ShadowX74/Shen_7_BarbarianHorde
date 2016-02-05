@@ -21,7 +21,7 @@ public class Player {
         }
         
 	public Animation sprite, up, down, left, right, wait;
-	private static int startX, startY, width = 30, height = 42;
+	private static int startX, startY, width = 28, height = 28;
 	public static Shape rect = new Rectangle(getplayershitboxX(), getplayershitboxY(), width, height);
 	public static float pdelta;
 	public static Animation playeranime;

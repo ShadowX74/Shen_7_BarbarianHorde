@@ -38,7 +38,7 @@ public class Enemy {
     double rightlimit = (MapWidth * SIZE) - (SIZE * 0.75);
     double downlimit = (MapHeight * SIZE) - (SIZE * 0.75);
 
-    private int startX, startY, width = 35, height = 42;
+    private int startX, startY, width = 32, height = 64;
 
     float hitboxX = this.Bx + 8f;
     float hitboxY = this.By + 8f;

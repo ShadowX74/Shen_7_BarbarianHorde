@@ -75,6 +75,7 @@ public class BarbarianHorde extends BasicGameState {
         bosses.add(SandBoss);
         bosses.add(Boss);
         bosses.add(Boss2);
+        
         ring = new FinalRing(1615, 3133);
 	stuffwin.add(ring);
     }
@@ -101,9 +102,6 @@ public class BarbarianHorde extends BasicGameState {
                 k.currentImage.draw(k.x, k.y);
             }
         }
-        for (Enemy r : bosses) {
-            r.move();
-        }
 	for (Enemy e : bosses) {
             if (e.isVisible) {
         	e.currentanime.draw(e.Bx, e.By);
@@ -126,6 +124,9 @@ public class BarbarianHorde extends BasicGameState {
 	float projectedright = playerguy.x + fdelta + SIZE;
 	boolean cangoright = projectedright < rightlimit;
 
+        for (Enemy r : bosses) {
+            r.move();
+        }
 	if (input.isKeyDown(Input.KEY_UP)) {
             playerguy.sprite = playerguy.up;
             float fdsc = (float) (fdelta - (SIZE * .15));

@@ -20,12 +20,13 @@ public class Orb {
         private boolean isVisible;
 	Image orbpic;
         Shape hitbox;
+        
         public Orb(int a, int b) throws SlickException {
-            this.x = x;
-            this.y = y;
+            this.x = a;
+            this.y = b;
             this.isVisible = false;
             this.orbpic = new Image("res/orbs/Ninja_12.png");
-            this.hitbox = new Rectangle (a, b, 32, 32);
+            this.hitbox = new Rectangle (a, b, 100, 100);
         }
 
     public int getX() {
