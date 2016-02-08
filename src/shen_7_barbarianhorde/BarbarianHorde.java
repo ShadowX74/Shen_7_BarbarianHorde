@@ -127,7 +127,25 @@ public class BarbarianHorde extends BasicGameState {
         for (Enemy r : bosses) {
             r.move();
         }
-	if (input.isKeyDown(Input.KEY_UP)) {
+	if (input.isKeyDown(Input.KEY_SPACE)) {
+            orb1.setX((int) playerguy.x - 38);
+            orb1.setY((int) playerguy.y - 38);
+            orb1.setIsVisible(true);
+            orb1.setTimeExists(25);
+            if (playerguy.sprite == playerguy.right) {
+                orb1.xmove = 10;
+                orb1.ymove = 0;
+            } else if (playerguy.sprite == playerguy.left) {
+                orb1.xmove = -10;
+                orb1.ymove = 0;
+            } else if (playerguy.sprite == playerguy.up) {
+                orb1.xmove = 0;
+                orb1.ymove = -10;
+            } else if (playerguy.sprite == playerguy.down) {
+                orb1.xmove = 0;
+                orb1.ymove = 10;
+            }
+        } else if (input.isKeyDown(Input.KEY_UP)) {
             playerguy.sprite = playerguy.up;
             float fdsc = (float) (fdelta - (SIZE * .15));
             if (!(isBlocked(playerguy.x, playerguy.y - fdelta) || isBlocked((float) (playerguy.x + SIZE + 1.5), playerguy.y - fdelta))) {
@@ -152,13 +170,17 @@ public class BarbarianHorde extends BasicGameState {
 		playerguy.sprite.update(delta);
 		playerguy.x += fdelta;
             }
-	} else if (input.isKeyDown(Input.KEY_SPACE)) {
-            orb1.setX((int) playerguy.x);
-            orb1.setY((int) playerguy.y);
-            orb1.hitbox.setX(orb1.getX());
-            orb1.hitbox.setY(orb1.getY());
-            orb1.setIsVisible(!orb1.isIsVisible());
-            orb1.setIsVisible(true);
+	}
+        if (orb1.isIsVisible()) {
+            if (orb1.getTimeExists() > 0) {
+                orb1.setX(orb1.x += orb1.xmove);
+                orb1.setY(orb1.y += orb1.ymove);
+                orb1.hitbox.setX(orb1.getX());
+                orb1.hitbox.setY(orb1.getY());
+                orb1.countdown();
+            } else {
+                orb1.setIsVisible(false);
+            }
         }
         
 	playerguy.rect.setLocation(playerguy.getplayershitboxX(),
@@ -183,7 +205,9 @@ public class BarbarianHorde extends BasicGameState {
             }
 	}
         for (Enemy e : bosses) {
-            if (playerguy.rect.intersects(e.rect)) {
+            if (orb1.hitbox.intersects(e.rect)) {
+                e.isVisible = false;
+            } else if (playerguy.rect.intersects(e.rect)) {
                 if (e.isVisible) {
                     playerguy.health -= 34;
                     e.isVisible = false;
@@ -198,12 +222,6 @@ public class BarbarianHorde extends BasicGameState {
 		}
             }
 	}
-        
-        for (Enemy e: bosses) {
-            if (orb1.hitbox.intersects(e.rect)) {
-                e.isVisible= false;
-            }
-        }
 	playerguy.time -= counter/1000;
 	if(playerguy.time <= 0 || playerguy.health <= 0){
             sbg.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
