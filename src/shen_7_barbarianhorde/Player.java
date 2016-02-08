@@ -18,7 +18,7 @@ public class Player {
 
         public enum Direction {
             UP, DOWN, LEFT, RIGHT, WAIT
-        }
+        } 
         
 	public Animation sprite, up, down, left, right, wait;
 	private static int startX, startY, width = 28, height = 28;

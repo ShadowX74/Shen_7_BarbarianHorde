@@ -15,20 +15,36 @@ import org.newdawn.slick.geom.Shape;
  * @author ShadowX
  */
 public class Orb {
-        private int x, y, width, height; 
+        public int x, y, width, height, xmove, ymove; 
         private int dmg, hitboxX, hitboxY;
         private boolean isVisible;
 	Image orbpic;
         Shape hitbox;
+        private int timeExists;
         
         public Orb(int a, int b) throws SlickException {
             this.x = a;
             this.y = b;
             this.isVisible = false;
             this.orbpic = new Image("res/orbs/Ninja_12.png");
-            this.hitbox = new Rectangle (a, b, 96, 96);
+            this.hitbox = new Rectangle (a, b, 100, 100);
+            this.timeExists = 25;
+            this.xmove = 0;
+            this.ymove = 0;
         }
 
+    public int getTimeExists() {
+        return timeExists;
+    }
+
+    public void setTimeExists(int t) {
+        this.timeExists = t;
+    }
+
+    public void countdown() {
+        this.timeExists--;
+    }
+    
     public int getX() {
         return x;
     }
