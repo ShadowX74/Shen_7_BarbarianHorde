@@ -11,11 +11,10 @@ import org.newdawn.slick.geom.Shape;
  */
 public class Orb {
         public int x, y, width, height, xmove, ymove; 
-        private int dmg, hitboxX, hitboxY;
+        private int dmg, hitboxX, hitboxY, timeExists;
         private boolean isVisible;
 	Image orbpic;
         Shape hitbox;
-        private int timeExists;
         
         public Orb(int a, int b) throws SlickException {
             this.x = a;
@@ -23,7 +22,7 @@ public class Orb {
             this.isVisible = false;
             this.orbpic = new Image("res/orbs/Ninja_12.png");
             this.hitbox = new Rectangle (a, b, 100, 100);
-            this.timeExists = 25;
+            this.timeExists = 35;
             this.xmove = 0;
             this.ymove = 0;
         }

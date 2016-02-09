@@ -57,6 +57,19 @@ public class BarbarianHorde extends BasicGameState {
             }
 	}
 
+        for (int xAxis = 0; xAxis < grassMap.getWidth(); xAxis++) {
+            for (int yAxis = 0; yAxis < grassMap.getHeight(); yAxis++) {
+                int xBlock = (int) xAxis;
+                int yBlock = (int) yAxis;
+                if (!Blocked.blocked[xBlock][yBlock]) {
+                    if (yBlock % 10 == 0 && xBlock % 10 == 0) {
+                        Enemy e = new Enemy(xAxis * SIZE, yAxis * SIZE);
+                        bosses.add(e);
+                    }
+                }
+
+            }
+        }
         orb1 = new Orb((int) Player.x + 5, (int) Player.y - 10);
         
         gate1 = new Gate(1600,1950);
@@ -128,10 +141,10 @@ public class BarbarianHorde extends BasicGameState {
             r.move();
         }
 	if (input.isKeyDown(Input.KEY_SPACE)) {
-            orb1.setX((int) playerguy.x - 38);
-            orb1.setY((int) playerguy.y - 38);
+            orb1.setX((int) playerguy.x - 24);
+            orb1.setY((int) playerguy.y - 24);
             orb1.setIsVisible(true);
-            orb1.setTimeExists(25);
+            orb1.setTimeExists(35);
             if (playerguy.sprite == playerguy.right) {
                 orb1.xmove = 10;
                 orb1.ymove = 0;
@@ -209,7 +222,7 @@ public class BarbarianHorde extends BasicGameState {
                 e.isVisible = false;
             } else if (playerguy.rect.intersects(e.rect)) {
                 if (e.isVisible) {
-                    playerguy.health -= 34;
+                    playerguy.health -= 20;
                     e.isVisible = false;
                 }
             }
@@ -218,6 +231,7 @@ public class BarbarianHorde extends BasicGameState {
             if (playerguy.rect.intersects(w.hitbox)) {
 		if (w.isvisible) {
                     w.isvisible = false;
+                    playerguy.hasRing = true;
                     sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
             }
