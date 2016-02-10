@@ -21,7 +21,7 @@ public class Orb {
             this.y = b;
             this.isVisible = false;
             this.orbpic = new Image("res/orbs/Ninja_12.png");
-            this.hitbox = new Rectangle (a, b, 100, 100);
+            this.hitbox = new Rectangle (a, b, 64, 64);
             this.timeExists = 35;
             this.xmove = 0;
             this.ymove = 0;

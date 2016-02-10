@@ -12,7 +12,7 @@ public class Player {
 	public static int time = 300000;
 	public static float speed = .4f;
         public static int health = 100;
-        public static boolean hasKey =  false, hasRing = false;
+        public boolean hasKey =  false, hasRing = false;
 	static float hitboxX = x + 4f;
 	static float hitboxY = y + 4f;
 

@@ -62,7 +62,7 @@ public class BarbarianHorde extends BasicGameState {
                 int xBlock = (int) xAxis;
                 int yBlock = (int) yAxis;
                 if (!Blocked.blocked[xBlock][yBlock]) {
-                    if (yBlock % 10 == 0 && xBlock % 10 == 0) {
+                    if (yBlock % 5 == 0 && xBlock % 10 == 0) {
                         Enemy e = new Enemy(xAxis * SIZE, yAxis * SIZE);
                         bosses.add(e);
                     }
@@ -141,7 +141,7 @@ public class BarbarianHorde extends BasicGameState {
             r.move();
         }
 	if (input.isKeyDown(Input.KEY_SPACE)) {
-            orb1.setX((int) playerguy.x - 24);
+            orb1.setX((int) playerguy.x - 20);
             orb1.setY((int) playerguy.y - 24);
             orb1.setIsVisible(true);
             orb1.setTimeExists(35);
@@ -232,12 +232,14 @@ public class BarbarianHorde extends BasicGameState {
 		if (w.isvisible) {
                     w.isvisible = false;
                     playerguy.hasRing = true;
+                    makeVisible();
                     sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
             }
 	}
 	playerguy.time -= counter/1000;
 	if(playerguy.time <= 0 || playerguy.health <= 0){
+//            makeVisible();
             sbg.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
     }
@@ -246,6 +248,12 @@ public class BarbarianHorde extends BasicGameState {
     	return 1;
     }
 
+    public void makeVisible(){
+        for (Enemy e : bosses) {
+            e.isVisible = true;
+        }
+    }
+    
     private boolean isBlocked(float tx, float ty) {
         int xBlock = (int) tx / SIZE;
     	int yBlock = (int) ty / SIZE;
