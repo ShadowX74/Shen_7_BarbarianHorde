@@ -62,7 +62,7 @@ public class BarbarianHorde extends BasicGameState {
                 int xBlock = (int) xAxis;
                 int yBlock = (int) yAxis;
                 if (!Blocked.blocked[xBlock][yBlock]) {
-                    if (yBlock % 5 == 0 && xBlock % 10 == 0) {
+                    if (yBlock % 20 == 0 && xBlock % 20 == 0) {
                         Enemy e = new Enemy(xAxis * SIZE, yAxis * SIZE);
                         bosses.add(e);
                     }
@@ -70,7 +70,7 @@ public class BarbarianHorde extends BasicGameState {
 
             }
         }
-        orb1 = new Orb((int) Player.x + 5, (int) Player.y - 10);
+        orb1 = new Orb((int) BarbarianHorde.playerguy.x + 5, (int) BarbarianHorde.playerguy.y - 10);
         
         gate1 = new Gate(1600,1950);
         gate2 = new Gate(1632,1950);
@@ -239,7 +239,7 @@ public class BarbarianHorde extends BasicGameState {
 	}
 	playerguy.time -= counter/1000;
 	if(playerguy.time <= 0 || playerguy.health <= 0){
-//            makeVisible();
+            makeVisible();
             sbg.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
     }

@@ -7,24 +7,24 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 public class Player {
-    public static float x = 49f;
-    public static float y = 86f;
+    public float x = 49f;
+    public  float y = 86f;
     public int time = 300000;
     public float speed = .4f;
     public int health = 100;
     public boolean hasKey =  false, hasRing = false;
-    static float hitboxX = x + 4f;
-    static float hitboxY = y + 4f;
+    float hitboxX = x + 4f;
+    float hitboxY = y + 4f;
 
     public enum Direction {
         UP, DOWN, LEFT, RIGHT, WAIT
     } 
         
     public Animation sprite, up, down, left, right, wait;
-    private static int startX, startY, width = 28, height = 28;
-    public static Shape rect = new Rectangle(getplayershitboxX(), getplayershitboxY(), width, height);
-    public static float pdelta;
-    public static Animation playeranime;
+    private int startX, startY, width = 28, height = 28;
+    public Shape rect = new Rectangle(getplayershitboxX(), getplayershitboxY(), width, height);
+    public float pdelta;
+    public Animation playeranime;
         
     Player() throws SlickException{
         SpriteSheet runningSS = new SpriteSheet("res/travelersmall.png",32, 32, 0);
@@ -87,35 +87,35 @@ public class Player {
         sprite = wait;
     }
 
-    public static void setpdelta(float somenum) {
+    public void setpdelta(float somenum) {
 	pdelta = somenum;
     }
 
-    public static float getpdelta() {
+    public float getpdelta() {
 	return pdelta;
     }
 
-    public static float getplayersX() {
+    public float getplayersX() {
 	return x;
     }
 
-    public static float getplayersY() {
+    public float getplayersY() {
 	return y;
     }
 
-    public static float getplayershitboxX() {
+    public float getplayershitboxX() {
 	return x + 18f;
     }
 
-    public static float getplayershitboxY() {
+    public float getplayershitboxY() {
 	return y + 18f;
     }
 
-    public static void setplayershitboxX() {
+    public void setplayershitboxX() {
     	hitboxX = getplayershitboxX();
     }
 
-    public static void setplayershitboxY() {
+    public void setplayershitboxY() {
 	hitboxY = getplayershitboxY();
     }
 }

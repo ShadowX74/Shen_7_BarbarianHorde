@@ -120,10 +120,10 @@ public class Orb {
     }
 
     public void setLocation(int a, int b) {
-        this.setX((int) Player.x);
-        this.setY((int) Player.y);
-        this.setHitboxX((int) Player.x + 5);
-        this.setHitboxY((int) Player.y - 10);
+        this.setX((int) BarbarianHorde.playerguy.x);
+        this.setY((int) BarbarianHorde.playerguy.y);
+        this.setHitboxX((int) BarbarianHorde.playerguy.x + 5);
+        this.setHitboxY((int) BarbarianHorde.playerguy.y - 10);
     }
     /**
          * Getters and setters are a common concept in Java.
@@ -132,6 +132,6 @@ public class Orb {
          * Getters - are methods used to query the value of instance variables.
          * this.getLocationX();
          * Setters - methods that set values for instance variables
-         * this.setLocation(Player.x, Player.y)
+         * this.setLocation(BarbarianHorde.playerguy.x, BarbarianHorde.playerguy.y)
          */
 }

@@ -148,12 +148,12 @@ public class Enemy {
 
 
     private boolean canigoup() {
-        fdelta = Player.getpdelta();
+        fdelta = BarbarianHorde.playerguy.getpdelta();
         return (!isBlocked(this.Bx, this.By - fdelta) || !isBlocked(this.Bx + SIZE - 1, this.By - fdelta));
     }
 
     private boolean canigodown() {
-        fdelta = Player.getpdelta();
+        fdelta = BarbarianHorde.playerguy.getpdelta();
         return ((!isBlocked(this.Bx, this.By + SIZE + 8) || !isBlocked(this.Bx + SIZE - 1, this.By + SIZE + fdelta)));
     }
 
@@ -162,16 +162,14 @@ public class Enemy {
     }
 
     private boolean canigoleft() {
-
-        fdelta = Player.getpdelta();
-
+        fdelta = BarbarianHorde.playerguy.getpdelta();
         return (!isBlocked(this.Bx - SIZE / 2, this.By + SIZE / 2) || !isBlocked(this.Bx - SIZE, this.By) || !isBlocked(this.Bx - fdelta, this.By + SIZE - 16));
     }
 
 
     void moveup() throws SlickException {
         if (this.canigoup()) {
-            fdelta = Player.getpdelta();
+            fdelta = BarbarianHorde.playerguy.getpdelta();
             this.currentanime = skup;
             this.By -= fdelta;
             this.rect.setLocation(this.Bx, this.By);
@@ -182,7 +180,7 @@ public class Enemy {
 
     void movedown() throws SlickException {
         if (this.canigodown()) {
-            fdelta = Player.getpdelta();
+            fdelta = BarbarianHorde.playerguy.getpdelta();
             this.currentanime = skdown;
             this.By += fdelta;
             this.rect.setLocation(this.Bx, this.By);
@@ -192,7 +190,7 @@ public class Enemy {
 
     void moveleft() throws SlickException {
         if (this.canigoleft()) {
-            fdelta = Player.getpdelta();
+            fdelta = BarbarianHorde.playerguy.getpdelta();
             this.currentanime = skleft;
             this.Bx -= fdelta;
             this.rect.setLocation(this.Bx, this.By);
@@ -201,7 +199,7 @@ public class Enemy {
 
     void moveright() throws SlickException {
         if (this.canigoright()) {
-            fdelta = Player.getpdelta();
+            fdelta = BarbarianHorde.playerguy.getpdelta();
             this.currentanime = skright;
             this.Bx += fdelta;
             this.rect.setLocation(this.Bx, this.By);
@@ -210,19 +208,19 @@ public class Enemy {
 
 
     void setdirection() {
-        if (Player.getplayersY() < this.By) {
+        if (BarbarianHorde.playerguy.getplayersY() < this.By) {
             this.mydirection = Direction.UP;
         }
 
-        if ((Player.getplayersY() > this.By)) {
+        if ((BarbarianHorde.playerguy.getplayersY() > this.By)) {
             this.mydirection = Direction.DOWN;
         }
 
-        if ((Player.getplayersX() > this.Bx)) {
+        if ((BarbarianHorde.playerguy.getplayersX() > this.Bx)) {
             this.mydirection = Direction.RIGHT;
         }
 
-        if ((Player.getplayersX() < this.Bx) && canigoleft()) {
+        if ((BarbarianHorde.playerguy.getplayersX() < this.Bx) && canigoleft()) {
             this.mydirection = Direction.LEFT;
         } else {
             this.mydirection = Direction.DOWN;
@@ -231,16 +229,16 @@ public class Enemy {
 
     void move() throws SlickException {
         if (true){
-            if (this.Bx > Player.getplayersX()) {
+            if (this.Bx > BarbarianHorde.playerguy.getplayersX()) {
                 this.moveleft();
-            } else if (this.Bx < Player.getplayersX()) {
+            } else if (this.Bx < BarbarianHorde.playerguy.getplayersX()) {
                 this.moveright();
             } else {
             } 
             
-            if (this.By > Player.getplayersY()) {
+            if (this.By > BarbarianHorde.playerguy.getplayersY()) {
                 this.moveup();
-            } else if (this.By < Player.getplayersY()) {
+            } else if (this.By < BarbarianHorde.playerguy.getplayersY()) {
                 this.movedown();
             } else {
                 int r = (int) (Math.random() * (5 - 1)) + 1;
