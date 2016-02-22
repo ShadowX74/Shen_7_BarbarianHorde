@@ -101,7 +101,9 @@ public class BarbarianHorde extends BasicGameState {
 	playerguy.sprite.draw((int) playerguy.x, (int) playerguy.y);
 	g.drawString("Time Left: " + playerguy.time/1000, camera.cameraX + 10, camera.cameraY + 10);
 	g.drawString("Health: " + (int)(playerguy.health), camera.cameraX + 10, camera.cameraY + 25);
-
+        
+        g.drawString("x: " + (int)playerguy.x + "y: " +(int)playerguy.y ,playerguy.x, playerguy.y - 10);
+        
         if (orb1.isIsVisible()) {
             orb1.orbpic.draw(orb1.getX(), orb1.getY());
         }
@@ -222,7 +224,7 @@ public class BarbarianHorde extends BasicGameState {
                 e.isVisible = false;
             } else if (playerguy.rect.intersects(e.rect)) {
                 if (e.isVisible) {
-                    playerguy.health -= 20;
+                    playerguy.health -= 25;
                     e.isVisible = false;
                 }
             }
