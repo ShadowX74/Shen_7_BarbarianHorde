@@ -15,7 +15,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class BarbarianHorde extends BasicGameState {
     public FinalRing ring;
-    public Orb orb1;
+    public Projectile orb1;
     static public Keys key1;
     static public Enemy MetalBoss, SandBoss, Boss, Boss2;
     static public Gate gate1, gate2;
@@ -62,7 +62,7 @@ public class BarbarianHorde extends BasicGameState {
                 int xBlock = (int) xAxis;
                 int yBlock = (int) yAxis;
                 if (!Blocked.blocked[xBlock][yBlock]) {
-                    if (yBlock % 20 == 0 && xBlock % 20 == 0) {
+                    if (yBlock % 40 == 0 && xBlock % 20 == 0) {
                         Enemy e = new Enemy(xAxis * SIZE, yAxis * SIZE);
                         bosses.add(e);
                     }
@@ -70,7 +70,7 @@ public class BarbarianHorde extends BasicGameState {
 
             }
         }
-        orb1 = new Orb((int) BarbarianHorde.playerguy.x + 5, (int) BarbarianHorde.playerguy.y - 10);
+        orb1 = new Projectile((int) BarbarianHorde.playerguy.x + 5, (int) BarbarianHorde.playerguy.y - 10);
         
         gate1 = new Gate(1600,1950);
         gate2 = new Gate(1632,1950);
@@ -143,8 +143,8 @@ public class BarbarianHorde extends BasicGameState {
             r.move();
         }
 	if (input.isKeyDown(Input.KEY_SPACE)) {
-            orb1.setX((int) playerguy.x - 20);
-            orb1.setY((int) playerguy.y - 24);
+            orb1.setX((int) playerguy.x);
+            orb1.setY((int) playerguy.y - 10);
             orb1.setIsVisible(true);
             orb1.setTimeExists(35);
             if (playerguy.sprite == playerguy.right) {
@@ -209,6 +209,13 @@ public class BarbarianHorde extends BasicGameState {
 		}
             }
 	}
+        
+        for (Enemy r : bosses) {
+            if (r.health <= 0) {
+                r.isVisible = false;
+            }
+        }
+        
         for (Gate d : gates) {
             if (playerguy.rect.intersects(d.hitbox)) {
                 if (d.isvisible && playerguy.hasKey == true) {
@@ -221,7 +228,8 @@ public class BarbarianHorde extends BasicGameState {
 	}
         for (Enemy e : bosses) {
             if (orb1.hitbox.intersects(e.rect)) {
-                e.isVisible = false;
+                e.health -= 5;
+                orb1.setIsVisible(false);
             } else if (playerguy.rect.intersects(e.rect)) {
                 if (e.isVisible) {
                     playerguy.health -= 25;

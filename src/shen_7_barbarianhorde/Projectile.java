@@ -9,19 +9,19 @@ import org.newdawn.slick.geom.Shape;
  *
  * @author ShadowX
  */
-public class Orb {
+public class Projectile {
         public int x, y, width, height, xmove, ymove; 
         private int dmg, hitboxX, hitboxY, timeExists;
         private boolean isVisible;
 	Image orbpic;
         Shape hitbox;
         
-        public Orb(int a, int b) throws SlickException {
+        public Projectile(int a, int b) throws SlickException {
             this.x = a;
             this.y = b;
             this.isVisible = false;
-            this.orbpic = new Image("res/orbs/Ninja_12.png");
-            this.hitbox = new Rectangle (a, b, 64, 64);
+            this.orbpic = new Image("res/crawl-tiles Oct-5-2010/effect/bolt01.png");
+            this.hitbox = new Rectangle (a, b, 32, 32);
             this.timeExists = 35;
             this.xmove = 0;
             this.ymove = 0;

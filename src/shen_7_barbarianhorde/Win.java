@@ -3,6 +3,7 @@ package shen_7_barbarianhorde;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -12,18 +13,19 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class Win extends BasicGameState {
     private StateBasedGame game;
+    public Image startimage;
 
     public Win(int xSize, int ySize) {
     }
 
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        startimage = new Image("res/Win.png");
         this.game = game;
     }
 
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    	startimage.draw();
         g.setColor(Color.white);
-        g.drawString("You found the ring in time!", 380, 200);
-        g.drawString("Press 1 to play again", 400, 320);
     }
     
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {

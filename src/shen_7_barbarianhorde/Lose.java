@@ -14,8 +14,9 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class Lose extends BasicGameState {
     private StateBasedGame game;
     public Image startimage;
+    
     public Lose(int xSize, int ySize) {
-}
+    }
 
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
     	startimage = new Image("res/Lose.png");

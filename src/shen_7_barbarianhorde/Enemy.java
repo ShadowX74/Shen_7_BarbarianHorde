@@ -57,9 +57,7 @@ public class Enemy {
         hitboxX = this.getskhitboxX();
         hitboxY = this.getskhitboxY();
         rect = new Rectangle(hitboxX, hitboxY, width, height);
-        int BHealth;
 
-        boolean isBAlive = true;
         canmove = true;
 
         currentanime = skwait;
