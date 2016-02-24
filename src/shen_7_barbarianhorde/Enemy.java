@@ -9,7 +9,7 @@ import org.newdawn.slick.geom.Shape;
 public class Enemy {
     private static int numberOfEnemies = 4;
     private int id;
-    boolean[][] eblocked = Blocked.getblocked();
+    boolean[][] eblocked = Blocked.getBlocked();
     private Animation skeleton, skup, skdown, skleft, skright, skwait, skdead;
 
     int SIZE = 64;
