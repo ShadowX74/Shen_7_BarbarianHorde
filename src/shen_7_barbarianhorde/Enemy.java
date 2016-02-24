@@ -38,10 +38,10 @@ public class Enemy {
     double rightlimit = (MapWidth * SIZE) - (SIZE * 0.75);
     double downlimit = (MapHeight * SIZE) - (SIZE * 0.75);
 
-    private int startX, startY, width = 32, height = 64;
+    private int startX, startY, width = 28, height = 58;
 
-    float hitboxX = this.Bx + 8f;
-    float hitboxY = this.By + 8f;
+    float hitboxX = this.Bx;
+    float hitboxY = this.By;
     boolean isVisible = true;
     public Shape rect;
 

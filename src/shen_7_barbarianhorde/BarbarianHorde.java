@@ -18,11 +18,12 @@ public class BarbarianHorde extends BasicGameState {
     public Projectile orb1;
     static public Keys key1;
     static public Enemy MetalBoss, SandBoss, Boss, Boss2;
-    static public Gate gate1, gate2;
+    static public Gate gate1, gate2, descend1, descend2;
     public static Player playerguy;
 
     public ArrayList<FinalRing> stuffwin = new ArrayList();
     public ArrayList<Gate> gates = new ArrayList();
+    public ArrayList<Gate> finalgates = new ArrayList();
     public ArrayList<Keys> keyz = new ArrayList();
     public ArrayList<Enemy> bosses = new ArrayList();
     
@@ -72,11 +73,17 @@ public class BarbarianHorde extends BasicGameState {
         }
         orb1 = new Projectile((int) BarbarianHorde.playerguy.x + 5, (int) BarbarianHorde.playerguy.y - 10);
         
-        gate1 = new Gate(1600,1950);
-        gate2 = new Gate(1632,1950);
+        gate1 = new Gate(1600,1950, true);
+        gate2 = new Gate(1632,1950, true);
         gates.add(gate1);
         gates.add(gate2);
 
+        
+        descend1 = new Gate(512,33, false);
+        descend2 = new Gate(512,64, false);
+        finalgates.add(descend1);
+        finalgates.add(descend2);
+        
         key1 = new Keys(3082,1489);
         keyz.add(key1);
                 
@@ -108,6 +115,11 @@ public class BarbarianHorde extends BasicGameState {
             orb1.orbpic.draw(orb1.getX(), orb1.getY());
         }
         for (Gate d : gates) {
+            if (d.isvisible) {
+                d.currentImage.draw(d.x, d.y);
+            }
+        }
+        for (Gate d : finalgates) {
             if (d.isvisible) {
                 d.currentImage.draw(d.x, d.y);
             }
@@ -213,6 +225,8 @@ public class BarbarianHorde extends BasicGameState {
         for (Enemy r : bosses) {
             if (r.health <= 0) {
                 r.isVisible = false;
+                r.hitboxX = 0;
+                r.hitboxY = 0;
             }
         }
         
@@ -226,10 +240,21 @@ public class BarbarianHorde extends BasicGameState {
                 }
             }
 	}
+       for (Gate d : finalgates) {
+            if (playerguy.rect.intersects(d.hitbox)) {
+                if (d.isvisible && playerguy.hasRing == true) {
+                    d.isvisible = false;
+		}
+                if (d.isvisible && playerguy.hasRing == false) {
+                    playerguy.x -= 10;
+                }
+            }
+	}
         for (Enemy e : bosses) {
             if (orb1.hitbox.intersects(e.rect)) {
-                e.health -= 5;
-                orb1.setIsVisible(false);
+                e.health -= 15;
+                orb1.x = 0;
+                orb1.y = 0;
             } else if (playerguy.rect.intersects(e.rect)) {
                 if (e.isVisible) {
                     playerguy.health -= 25;

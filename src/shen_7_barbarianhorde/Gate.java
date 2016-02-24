@@ -12,11 +12,16 @@ public class Gate {
     Image currentImage;
     Shape hitbox;
     Image door = new Image("res/crawl-tiles Oct-5-2010/dc-dngn/gateways/dngn_enter_gehenna.png");
+    Image door2 = new Image("res/crawl-tiles Oct-5-2010/dc-dngn/gateways/dngn_enter_pandemonium.png");
 
-    Gate(int a, int b) throws SlickException {
+    Gate(int a, int b, boolean reddoor) throws SlickException {
         this.x = a;
 	this.y = b;
 	this.hitbox = new Rectangle(a, b, 32, 32);
-	this.currentImage = door;
+        if (reddoor == true) {
+            this.currentImage = door;
+        } else {
+            this.currentImage = door2;
+        }
     }
 }
