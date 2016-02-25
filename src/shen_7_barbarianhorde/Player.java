@@ -8,14 +8,14 @@ import org.newdawn.slick.geom.Shape;
 
 public class Player {
     public float x = 49f;
-    public  float y = 86f;
+    public float y = 86f;
     public int time = 300000;
     public float speed = .4f;
-    public int health = 100;
+    public int health = 100, orbs = 20;
     public boolean hasKey =  false, hasRing = false;
     float hitboxX = x + 4f;
     float hitboxY = y + 4f;
-
+    
     public enum Direction {
         UP, DOWN, LEFT, RIGHT, WAIT
     } 

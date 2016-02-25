@@ -61,8 +61,10 @@ public class Lose extends BasicGameState {
                 BarbarianHorde.key1.isvisible = true;
                 BarbarianHorde.gate1.isvisible = true;
                 BarbarianHorde.gate2.isvisible = true;
+                BarbarianHorde.descend1.isvisible = true;
+                BarbarianHorde.descend2.isvisible = true;
                 BarbarianHorde.playerguy.hasKey = false;
-                //redo potions and reset cordinates of player
+                BarbarianHorde.playerguy.hasRing = false;
                 game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             

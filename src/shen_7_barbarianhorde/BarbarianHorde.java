@@ -19,11 +19,13 @@ public class BarbarianHorde extends BasicGameState {
     static public Keys key1;
     static public Enemy MetalBoss, SandBoss, Boss, Boss2;
     static public Gate gate1, gate2, descend1, descend2;
+    static public Stairs stair1, stair2;
     public static Player playerguy;
 
     public ArrayList<FinalRing> stuffwin = new ArrayList();
     public ArrayList<Gate> gates = new ArrayList();
     public ArrayList<Gate> finalgates = new ArrayList();
+    public ArrayList<Stairs> stair = new ArrayList();
     public ArrayList<Keys> keyz = new ArrayList();
     public ArrayList<Enemy> bosses = new ArrayList();
     
@@ -78,11 +80,15 @@ public class BarbarianHorde extends BasicGameState {
         gates.add(gate1);
         gates.add(gate2);
 
-        
         descend1 = new Gate(512,33, false);
         descend2 = new Gate(512,64, false);
         finalgates.add(descend1);
         finalgates.add(descend2);
+
+        stair1 = new Stairs(1,1);
+        stair2 = new Stairs(1,1);
+        stair.add(stair1);
+        stair.add(stair2);
         
         key1 = new Keys(3082,1489);
         keyz.add(key1);
@@ -106,8 +112,8 @@ public class BarbarianHorde extends BasicGameState {
 	camera.translateGraphics();
 
 	playerguy.sprite.draw((int) playerguy.x, (int) playerguy.y);
-	g.drawString("Time Left: " + playerguy.time/1000, camera.cameraX + 10, camera.cameraY + 10);
-	g.drawString("Health: " + (int)(playerguy.health), camera.cameraX + 10, camera.cameraY + 25);
+	g.drawString("Orbs left: " + playerguy.orbs, camera.cameraX + 10, camera.cameraY + 25);
+	g.drawString("Health: " + (int)(playerguy.health), camera.cameraX + 10, camera.cameraY + 10);
         
         g.drawString("x: " + (int)playerguy.x + "y: " +(int)playerguy.y ,playerguy.x, playerguy.y - 10);
         
@@ -122,6 +128,11 @@ public class BarbarianHorde extends BasicGameState {
         for (Gate d : finalgates) {
             if (d.isvisible) {
                 d.currentImage.draw(d.x, d.y);
+            }
+        }
+        for (Stairs s : stair) {
+            if (s.isvisible) {
+                s.currentImage.draw(s.x, s.y);
             }
         }
         for (Keys k : keyz) {
@@ -157,8 +168,10 @@ public class BarbarianHorde extends BasicGameState {
 	if (input.isKeyDown(Input.KEY_SPACE)) {
             orb1.setX((int) playerguy.x);
             orb1.setY((int) playerguy.y - 10);
-            orb1.setIsVisible(true);
-            orb1.setTimeExists(35);
+            if (playerguy.orbs > 0 && orb1.isIsVisible() == false) {
+                orb1.setIsVisible(true);
+                orb1.setTimeExists(35);
+            }
             if (playerguy.sprite == playerguy.right) {
                 orb1.xmove = 10;
                 orb1.ymove = 0;
@@ -207,6 +220,7 @@ public class BarbarianHorde extends BasicGameState {
                 orb1.countdown();
             } else {
                 orb1.setIsVisible(false);
+                playerguy.orbs -= 1;
             }
         }
         
@@ -252,7 +266,8 @@ public class BarbarianHorde extends BasicGameState {
 	}
         for (Enemy e : bosses) {
             if (orb1.hitbox.intersects(e.rect)) {
-                e.health -= 15;
+                orb1.setIsVisible(false);
+                e.health -= 20;
                 orb1.x = 0;
                 orb1.y = 0;
             } else if (playerguy.rect.intersects(e.rect)) {
@@ -267,13 +282,19 @@ public class BarbarianHorde extends BasicGameState {
 		if (w.isvisible) {
                     w.isvisible = false;
                     playerguy.hasRing = true;
+		}
+            }
+	}
+      	for (Stairs s : stair) {
+            if (playerguy.rect.intersects(s.hitbox)) {
+		if (s.isvisible) {
                     makeVisible();
                     sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
             }
 	}
 	playerguy.time -= counter/1000;
-	if(playerguy.time <= 0 || playerguy.health <= 0){
+	if(playerguy.health <= 0){
             makeVisible();
             sbg.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
