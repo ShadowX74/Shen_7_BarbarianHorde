@@ -15,7 +15,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class BarbarianHorde extends BasicGameState {
     public FinalRing ring;
-    public Projectile orb1;
+    public Bolts bolt1;
     static public Keys key1;
     static public Enemy MetalBoss, SandBoss, Boss, Boss2;
     static public Gate gate1, gate2, descend1, descend2;
@@ -73,20 +73,20 @@ public class BarbarianHorde extends BasicGameState {
 
             }
         }
-        orb1 = new Projectile((int) BarbarianHorde.playerguy.x + 5, (int) BarbarianHorde.playerguy.y - 10);
+        bolt1 = new Bolts((int) BarbarianHorde.playerguy.x + 5, (int) BarbarianHorde.playerguy.y - 10);
         
         gate1 = new Gate(1600,1950, true);
         gate2 = new Gate(1632,1950, true);
         gates.add(gate1);
         gates.add(gate2);
 
-        descend1 = new Gate(512,33, false);
+        descend1 = new Gate(512,32, false);
         descend2 = new Gate(512,64, false);
         finalgates.add(descend1);
         finalgates.add(descend2);
 
-        stair1 = new Stairs(1,1);
-        stair2 = new Stairs(1,1);
+        stair1 = new Stairs(575,32);
+        stair2 = new Stairs(575,64);
         stair.add(stair1);
         stair.add(stair2);
         
@@ -112,13 +112,13 @@ public class BarbarianHorde extends BasicGameState {
 	camera.translateGraphics();
 
 	playerguy.sprite.draw((int) playerguy.x, (int) playerguy.y);
-	g.drawString("Orbs left: " + playerguy.orbs, camera.cameraX + 10, camera.cameraY + 25);
+	g.drawString("Bolts left: " + playerguy.bolts, camera.cameraX + 150, camera.cameraY + 10);
 	g.drawString("Health: " + (int)(playerguy.health), camera.cameraX + 10, camera.cameraY + 10);
         
         g.drawString("x: " + (int)playerguy.x + "y: " +(int)playerguy.y ,playerguy.x, playerguy.y - 10);
         
-        if (orb1.isIsVisible()) {
-            orb1.orbpic.draw(orb1.getX(), orb1.getY());
+        if (bolt1.isIsVisible()) {
+            bolt1.boltpic.draw(bolt1.getX(), bolt1.getY());
         }
         for (Gate d : gates) {
             if (d.isvisible) {
@@ -166,24 +166,27 @@ public class BarbarianHorde extends BasicGameState {
             r.move();
         }
 	if (input.isKeyDown(Input.KEY_SPACE)) {
-            orb1.setX((int) playerguy.x);
-            orb1.setY((int) playerguy.y - 10);
-            if (playerguy.orbs > 0 && orb1.isIsVisible() == false) {
-                orb1.setIsVisible(true);
-                orb1.setTimeExists(35);
+            if (playerguy.bolts > 0) {
+                if (bolt1.isIsVisible() == false) {
+                    bolt1.setX((int) playerguy.x);
+                    bolt1.setY((int) playerguy.y - 10);
+                    bolt1.setIsVisible(true);
+                    bolt1.setTimeExists(35);
+                    playerguy.bolts -= 1;
+                }
             }
             if (playerguy.sprite == playerguy.right) {
-                orb1.xmove = 10;
-                orb1.ymove = 0;
+                bolt1.xmove = 10;
+                bolt1.ymove = 0;
             } else if (playerguy.sprite == playerguy.left) {
-                orb1.xmove = -10;
-                orb1.ymove = 0;
+                bolt1.xmove = -10;
+                bolt1.ymove = 0;
             } else if (playerguy.sprite == playerguy.up) {
-                orb1.xmove = 0;
-                orb1.ymove = -10;
+                bolt1.xmove = 0;
+                bolt1.ymove = -10;
             } else if (playerguy.sprite == playerguy.down) {
-                orb1.xmove = 0;
-                orb1.ymove = 10;
+                bolt1.xmove = 0;
+                bolt1.ymove = 10;
             }
         } else if (input.isKeyDown(Input.KEY_UP)) {
             playerguy.sprite = playerguy.up;
@@ -211,21 +214,19 @@ public class BarbarianHorde extends BasicGameState {
 		playerguy.x += fdelta;
             }
 	}
-        if (orb1.isIsVisible()) {
-            if (orb1.getTimeExists() > 0) {
-                orb1.setX(orb1.x += orb1.xmove);
-                orb1.setY(orb1.y += orb1.ymove);
-                orb1.hitbox.setX(orb1.getX());
-                orb1.hitbox.setY(orb1.getY());
-                orb1.countdown();
+        if (bolt1.isIsVisible()) {
+            if (bolt1.getTimeExists() > 0) {
+                bolt1.setX(bolt1.x += bolt1.xmove);
+                bolt1.setY(bolt1.y += bolt1.ymove);
+                bolt1.hitbox.setX(bolt1.getX());
+                bolt1.hitbox.setY(bolt1.getY());
+                bolt1.countdown();
             } else {
-                orb1.setIsVisible(false);
-                playerguy.orbs -= 1;
+                bolt1.setIsVisible(false);
             }
         }
         
-	playerguy.rect.setLocation(playerguy.getplayershitboxX(),
-	playerguy.getplayershitboxY());
+	playerguy.rect.setLocation(playerguy.getplayershitboxX(), playerguy.getplayershitboxY());
                 
         for (Keys k : keyz) {
             if (playerguy.rect.intersects(k.hitbox)) {
@@ -265,11 +266,15 @@ public class BarbarianHorde extends BasicGameState {
             }
 	}
         for (Enemy e : bosses) {
-            if (orb1.hitbox.intersects(e.rect)) {
-                orb1.setIsVisible(false);
-                e.health -= 20;
-                orb1.x = 0;
-                orb1.y = 0;
+            if (bolt1.hitbox.intersects(e.rect)) {
+                bolt1.setIsVisible(false);
+                e.health -= 5;
+                bolt1.x = 0;
+                bolt1.y = 0;
+                e.Bx = 3000;
+                e.By = 3000;
+                e.hitboxX = 3000;
+                e.hitboxY = 3000;
             } else if (playerguy.rect.intersects(e.rect)) {
                 if (e.isVisible) {
                     playerguy.health -= 25;
@@ -307,6 +312,7 @@ public class BarbarianHorde extends BasicGameState {
     public void makeVisible(){
         for (Enemy e : bosses) {
             e.isVisible = true;
+            e.health = 100;
         }
     }
     
