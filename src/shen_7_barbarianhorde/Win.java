@@ -39,7 +39,7 @@ public class Win extends BasicGameState {
     public void keyReleased(int key, char c) {
         switch (key) {
             case Input.KEY_1:
-                BarbarianHorde.playerguy.bolts  = 10;
+                BarbarianHorde.playerguy.bolts  = 20;
                 BarbarianHorde.playerguy.speed = .4f;
                 BarbarianHorde.playerguy.health = 100;
                 BarbarianHorde.counter = 0;

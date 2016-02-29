@@ -133,7 +133,6 @@ public class Enemy {
     }
     
     boolean isBlocked(float xcheck, float ycheck) {
-
         int xBlock = (int) (xcheck / SIZE);
         int yBlock = (int) (ycheck / SIZE);
 

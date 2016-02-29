@@ -162,9 +162,25 @@ public class BarbarianHorde extends BasicGameState {
 	float projectedright = playerguy.x + fdelta + SIZE;
 	boolean cangoright = projectedright < rightlimit;
 
-        for (Enemy r : bosses) {
-            r.move();
+        for (Enemy s : bosses) {
+            for (Enemy r : bosses) {
+                if (r.rect.intersects(s.rect)) {
+                    if (r.Bx > s.Bx) {
+                        r.moveright();
+                    } else if (r.Bx < s.Bx) {
+                        r.moveleft();
+                    }
+                    if (r.By > s.By) {
+                        r.movedown();
+                    } else if (r.By < s.By) {
+                        r.moveup();
+
+                    }
+                }
+            }
+            s.move();
         }
+
 	if (input.isKeyDown(Input.KEY_SPACE)) {
             if (playerguy.bolts > 0) {
                 if (bolt1.isIsVisible() == false) {
@@ -237,14 +253,6 @@ public class BarbarianHorde extends BasicGameState {
             }
 	}
         
-        for (Enemy r : bosses) {
-            if (r.health <= 0) {
-                r.isVisible = false;
-                r.hitboxX = 0;
-                r.hitboxY = 0;
-            }
-        }
-        
         for (Gate d : gates) {
             if (playerguy.rect.intersects(d.hitbox)) {
                 if (d.isvisible && playerguy.hasKey == true) {
@@ -268,18 +276,23 @@ public class BarbarianHorde extends BasicGameState {
         for (Enemy e : bosses) {
             if (bolt1.hitbox.intersects(e.rect)) {
                 bolt1.setIsVisible(false);
-                e.health -= 5;
                 bolt1.x = 0;
                 bolt1.y = 0;
-                e.Bx = 3000;
-                e.By = 3000;
-                e.hitboxX = 3000;
-                e.hitboxY = 3000;
+                bolt1.hitbox.setX(0);
+                bolt1.hitbox.setY(0);
+                e.health -= 50;
             } else if (playerguy.rect.intersects(e.rect)) {
                 if (e.isVisible) {
-                    playerguy.health -= 25;
+                    playerguy.health -= 20;
                     e.isVisible = false;
                 }
+            }
+            if (e.health <= 0) {
+                e.isVisible = false;
+                e.Bx = 3000;
+                e.By = 1;
+                e.hitboxX = 3000;
+                e.hitboxY = 1;
             }
 	}
 	for (FinalRing w : stuffwin) {

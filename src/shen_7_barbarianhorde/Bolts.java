@@ -21,7 +21,7 @@ public class Bolts {
             this.y = b;
             this.isVisible = false;
             this.boltpic = new Image("res/crawl-tiles Oct-5-2010/effect/bolt01.png");
-            this.hitbox = new Rectangle (a, b, 32, 32);
+            this.hitbox = new Rectangle (x, y, 32, 32);
             this.timeExists = 35;
             this.xmove = 0;
             this.ymove = 0;
