@@ -14,13 +14,14 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class BarbarianHorde extends BasicGameState {
-    public FinalRing ring;
-    public Bolts bolt1;
-    static public Keys key1;
-    static public Enemy MetalBoss, SandBoss, Boss, Boss2;
-    static public Gate gate1, gate2, descend1, descend2;
-    static public Stairs stair1, stair2;
-    public static Player playerguy;
+    private StateBasedGame game;
+    static FinalRing ring;
+    Bolts bolt1;
+    static Keys key1;
+    static Enemy MetalBoss, SandBoss, Boss, Boss2;
+    static Gate gate1, gate2, descend1, descend2;
+    static Stairs stair1, stair2;
+    static Player playerguy;
 
     public ArrayList<FinalRing> stuffwin = new ArrayList();
     public ArrayList<Gate> gates = new ArrayList();
@@ -73,7 +74,7 @@ public class BarbarianHorde extends BasicGameState {
 
             }
         }
-        bolt1 = new Bolts((int) BarbarianHorde.playerguy.x + 5, (int) BarbarianHorde.playerguy.y - 10);
+        bolt1 = new Bolts((int) playerguy.x + 5, (int) playerguy.y - 10);
         
         gate1 = new Gate(1600,1950, true);
         gate2 = new Gate(1632,1950, true);
@@ -333,5 +334,43 @@ public class BarbarianHorde extends BasicGameState {
         int xBlock = (int) tx / SIZE;
     	int yBlock = (int) ty / SIZE;
 	return Blocked.blocked[xBlock][yBlock];
+    }
+    
+    @Override
+    public void keyReleased(int key, char c) {
+        switch (key) {
+            case Input.KEY_R:
+                makeVisible();
+                playerguy.bolts  = 20;
+                playerguy.speed = .4f;
+                playerguy.health = 100;
+                counter = 0;
+                ring.isvisible = true;
+                playerguy.x = 49f;
+                playerguy.y = 86f;
+                SandBoss.isVisible = true;
+                SandBoss.Bx = 1597;
+                SandBoss.By = 2199;
+                Boss.isVisible = true;
+                Boss.Bx = 2800;
+                Boss.By = 2135;
+                Boss2.isVisible = true;
+                Boss2.Bx = 2039;
+                Boss2.By = 1500;
+                MetalBoss.isVisible = true;
+                MetalBoss.Bx = 2944;
+                MetalBoss.By = 1400;
+                key1.isvisible = true;
+                gate1.isvisible = true;
+                gate2.isvisible = true;
+                descend1.isvisible = true;
+                descend2.isvisible = true;
+                playerguy.hasKey = false;
+                playerguy.hasRing = false;
+                break;
+            
+            default:
+                break;
+        }
     }
 }

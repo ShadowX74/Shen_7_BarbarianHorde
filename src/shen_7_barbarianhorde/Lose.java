@@ -43,7 +43,7 @@ public class Lose extends BasicGameState {
                 BarbarianHorde.playerguy.speed = .4f;
                 BarbarianHorde.playerguy.health = 100;
                 BarbarianHorde.counter = 0;
-                FinalRing.isvisible = true;
+                BarbarianHorde.ring.isvisible = true;
                 BarbarianHorde.playerguy.x = 49f;
                 BarbarianHorde.playerguy.y = 86f;
                 BarbarianHorde.SandBoss.isVisible = true;

@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.Shape;
 public class FinalRing {
     public int x;
     public int y;
-    static public boolean isvisible = true;
+    public boolean isvisible = true;
     Image currentImage;
     Shape hitbox;
     Image key = new Image("res/crawl-tiles Oct-5-2010/UNUSED/rings/ring_twisted.png");
