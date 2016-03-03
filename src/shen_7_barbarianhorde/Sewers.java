@@ -26,7 +26,7 @@ public class Sewers extends BasicGameState {
     Bolts bolt2;
     static Player playerguy2;
     
-    private static TiledMap grassMap;
+    private static TiledMap sewerMap;
     private static AppGameContainer app;
     private static Camera camera;
     public static int counter = 0;
@@ -43,14 +43,14 @@ public class Sewers extends BasicGameState {
         gc.setShowFPS(false);
         
         playerguy2 = new Player();
-	grassMap = new TiledMap("res/mydungeon.tmx");
-	camera = new Camera(gc, grassMap);
+	sewerMap = new TiledMap("res/mydungeon.tmx");
+	camera = new Camera(gc, sewerMap);
 
-	Blocked.blocked = new boolean[grassMap.getWidth()][grassMap.getHeight()];
-	for (int xAxis = 0; xAxis < grassMap.getWidth(); xAxis++) {
-            for (int yAxis = 0; yAxis < grassMap.getHeight(); yAxis++) {
-		int tileID = grassMap.getTileId(xAxis, yAxis, 1);
-		String value = grassMap.getTileProperty(tileID,"blocked", "false");
+	Blocked.blocked = new boolean[sewerMap.getWidth()][sewerMap.getHeight()];
+	for (int xAxis = 0; xAxis < sewerMap.getWidth(); xAxis++) {
+            for (int yAxis = 0; yAxis < sewerMap.getHeight(); yAxis++) {
+		int tileID = sewerMap.getTileId(xAxis, yAxis, 1);
+		String value = sewerMap.getTileProperty(tileID,"blocked", "false");
 		if ("true".equals(value)) {
 			Blocked.blocked[xAxis][yAxis] = true;
 		}
@@ -77,7 +77,7 @@ public class Sewers extends BasicGameState {
 	float fdelta = delta * playerguy2.speed;
 	playerguy2.setpdelta(fdelta);
 
-	double rightlimit = (grassMap.getWidth() * SIZE) - (SIZE * 0.75);
+	double rightlimit = (sewerMap.getWidth() * SIZE) - (SIZE * 0.75);
 	float projectedright = playerguy2.x + fdelta + SIZE;
 	boolean cangoright = projectedright < rightlimit;
 
@@ -152,7 +152,7 @@ public class Sewers extends BasicGameState {
     }
 
     public int getID() {
-    	return 1;
+    	return 4;
     }
     
     private boolean isBlocked(float tx, float ty) {
