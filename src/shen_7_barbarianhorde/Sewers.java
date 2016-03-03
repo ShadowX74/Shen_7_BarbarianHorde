@@ -43,21 +43,30 @@ public class Sewers extends BasicGameState {
         gc.setShowFPS(false);
         
         playerguy2 = new Player();
-	sewerMap = new TiledMap("res/mydungeon.tmx");
+	sewerMap = new TiledMap("res/sewers.tmx");
 	camera = new Camera(gc, sewerMap);
 
-	Blocked.blocked = new boolean[sewerMap.getWidth()][sewerMap.getHeight()];
+	Blocked2.blocked2 = new boolean[sewerMap.getWidth()][sewerMap.getHeight()];
 	for (int xAxis = 0; xAxis < sewerMap.getWidth(); xAxis++) {
             for (int yAxis = 0; yAxis < sewerMap.getHeight(); yAxis++) {
 		int tileID = sewerMap.getTileId(xAxis, yAxis, 1);
 		String value = sewerMap.getTileProperty(tileID,"blocked", "false");
 		if ("true".equals(value)) {
-			Blocked.blocked[xAxis][yAxis] = true;
+			Blocked2.blocked2[xAxis][yAxis] = true;
 		}
             }
 	}
-        
-        
+    	
+        Trapped.trapped = new boolean[sewerMap.getWidth()][sewerMap.getHeight()];
+	for (int xAxis = 0; xAxis < sewerMap.getWidth(); xAxis++) {
+            for (int yAxis = 0; yAxis < sewerMap.getHeight(); yAxis++) {
+		int tileID = sewerMap.getTileId(xAxis, yAxis, 2);
+		String value = sewerMap.getTileProperty(tileID,"trapped", "false");
+		if ("true".equals(value)) {
+			Trapped.trapped[xAxis][yAxis] = true;
+		}
+            }
+	}
     }
     
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -158,7 +167,13 @@ public class Sewers extends BasicGameState {
     private boolean isBlocked(float tx, float ty) {
         int xBlock = (int) tx / SIZE;
     	int yBlock = (int) ty / SIZE;
-	return Blocked.blocked[xBlock][yBlock];
+	return Blocked2.blocked2[xBlock][yBlock];
+    }
+    
+    private boolean isTrapped(float tx, float ty) {
+        int xTrap = (int) tx / SIZE;
+    	int yTrap = (int) ty / SIZE;
+	return Trapped.trapped[xTrap][yTrap];
     }
     
     @Override
