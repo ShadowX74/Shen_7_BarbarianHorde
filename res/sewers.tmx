@@ -10,20 +10,75 @@
  </tileset>
  <tileset firstgid="3073" name="sewer_1_large" tilewidth="32" tileheight="32" tilecount="352">
   <image source="sewer_1_large.png" width="512" height="704"/>
+  <tile id="37">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="53">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="68">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="69">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="70">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="95">
+   <properties>
+    <property name="trapped" value="true"/>
+   </properties>
+  </tile>
+  <tile id="151">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="152">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="167">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="168">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="floor" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3RMQ0AMAzAsB6jXt69xiGHLQVB9s2sUtHgR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR8v/oU4H7T5SKkCcAAA=
+   H4sIAAAAAAAAA+2dTW4bMQxG3brLbtqeICnQRR03d6uTI+TenSAYwB3oh5RE8hPFxQMCxEhsvRFJUZrx25fT6S2A4u+5n18bn76eTp83zhu/z7JchP++BaN9fNs8fN/4oeDDo5MWHy8FHw+bh8eNn0QfKON5BXgPRx+5cebMD8lxR3GXel+j3ttMPlYgF69udz+/DvBBucZ6fv8OSszp+eyl/PGacHFLvG6EjxzPDB/oPHX4oM4JaR+rMbrezf2fkTmPy0xza3S9a/15pHge/DqOj/tYlcoXLT5K1+gfgPGWJJc3KD5SOVxjflg5QbsWUj5y4/1yxygf1jXqzD685g+uE8n6oMWH13oXoQ5L5fNVfSCQ89HiZAYf1vmqxUfrHKn56I0Htdq+9PvedYFWLOvxcVybWPtAGVNtH6311QzjYc3M/RK0tYOVj5nzeQmE+Rs+5Jy05DuOj9JeVMkHwnUn5SPVK9z/xigftXHn+Eh9Ps77nMnlCFrjVaoHLOFjNSg+Uj14qg9LOPsOKEQ+pzNyXuficPjAAsWHt5zSWoe0+MjVXzE/+kGZH61465nM7uNKcKKx5zHqupjdhzfCBx/J2qPmg9M7ofgYGTs89lIoPo5OevY/Uj5QxhWh5tbej9I6T6A5trX/xbneZt4fLKHZuxrp3qsPTSx87P3cW/gQJXVetOQlfPDgxk1uvNLygX6OUApUH6ti6cNbL1DDR+p+5xV8WMVLro+od/F85Agfsj5yLmJ/0N4Hpc9r4YO7NkboGY7wIRGvVl1jtPjQeH6JlI8Zz8Eh+JBiNR+r53PN+8/DRx6NfId2Hg5l7zZ8/O8DuZdi4aPlnpxeH8hzw9pHC97zB5qP2jMCwkeanueRhY8PRsbOJ4YT6v1qlOdncHxw+kgW67sL8z2OwsqHVO5G7olR/FJ9jM7nUUv1+0id5c35qMWY8NHu4x7t54VbYbVPEj6wiPUgFkcfPd8BEj7Chze8+EA/p7Caj3c81NCefEihuRfT83xq7vNed9CvY8vYd++jtv5edX5oeoz1BxYz+PBSO432Uevzhg9dHxGv6lzPfXsw4eMDlJpvNh/ez2VFvx2L2c+3e8v1GvGq9XzIzPcNaPiofa+UxPzwni96fOxOSrkF2QfyWSAJHzPOD6SYeJ3AhxRWdUDt+qL6QL3feTSa8yW1Bj3222s+vMwPay4EH4j1lRWSeavUm6H6oHyHqicfOaTj2e6jdY92NR/SpOZHS6+E6sNbf2NmH1QXSGsCBB+tIMYrlH2N8DGn5/CBxe4jwOEf9iHYw0CcAAA=
   </data>
  </layer>
  <layer name="walls" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3RMQ0AMAzAsB6jXt69xiGHLQVB9s2sUtHgR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR4sfLX60+NHiR8v/oU4H7T5SKkCcAAA=
+   H4sIAAAAAAAAA+3cQUrDQBiA0S5c9hweQU9gu/dOvYPeQG9pRAJFqE2YWXzgezAbrUnl42/tEHN5OBwuN9bL8fb3rtfr8Wddf+1852fvHXvrubec6/c67Xz8jLXn9xn1tpzrfVmPx/Fj/WezenwsHT6X9aTHkNk9GLO+7o7SYw7z0aJHix4terTo0aJHix4terSs+1yj9JjDfLSc7JekmI8WPVr0aNGjRY8WPVrWay1G6TGH+WjRo0WPFj1avt/LvZ93mI8WPVr0aNGjZf3fiVF6zGE+WvRo0aNFjxY9WvRo0aNFjxY9Wnw+bzEfLXq06NGiR8t6D6BResxhPlr0aNGjRY8WPVr0aLF/1WI+WvRo0aPl2X5Jivu9tni9anH/qxbz0aJHix4terTo0aJHix4t7i/aYj5a9GixX9JiPlr0aNGjRY8W17e3mI8WPVp8/mgxHy16tOjRokeLHi16tOjRokeL69tbzEeLHi32r1rMR4seLXq06NGiR4u/r1rW+fhrrdfAb1nnDY992XG8Pefe+zxGn9ue57jluOtxvgAIH7fvQJwAAA==
   </data>
  </layer>
  <layer name="traps" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3BMQEAAADCoPVP7WULoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgBt5RKnmQJwAAA==
+   H4sIAAAAAAAAA+3Xuw2AMAwFQAZgSPafgoIOIfGJQ8C+k6hR5GfHmSYAGGuZt49cstU023n4l6f5k1sgI7ONaDIFcXr3k34FqGv0HTD6/7RTQwAggp2CPZkAsjHXgCrMO6jNDAAAGMcuxl0yQwZyzNtkDgAgj167nZ2Rr5FJAIBz0TuTHQz+Qa8CAABXeT8AwDF3JMTRT7WoNwAAAHd4R+ZSsZ4Vzwy0MzsAAIAVj7RDfECcAAA=
   </data>
  </layer>
 </map>

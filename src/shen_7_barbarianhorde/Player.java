@@ -26,7 +26,10 @@ public class Player {
     public float pdelta;
     public Animation playeranime;
         
-    Player() throws SlickException{
+    Player(int a, int b) throws SlickException{
+        this.x = a;
+        this.y = b;
+        
         SpriteSheet runningSS = new SpriteSheet("res/travelersmall.png",32, 32, 0);
 
         up = new Animation();

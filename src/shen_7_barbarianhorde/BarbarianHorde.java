@@ -6,6 +6,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -22,6 +23,7 @@ public class BarbarianHorde extends BasicGameState {
     static Gate gate1, gate2, descend1, descend2;
     static Stairs stair1, stair2;
     static Player playerguy;
+    static Music music;
 
     public ArrayList<FinalRing> stuffwin = new ArrayList();
     public ArrayList<Gate> gates = new ArrayList();
@@ -46,8 +48,9 @@ public class BarbarianHorde extends BasicGameState {
         gc.setTargetFrameRate(60);
         gc.setShowFPS(false);
         
-        playerguy = new Player();
+        playerguy = new Player(49, 86);
 	grassMap = new TiledMap("res/mydungeon.tmx");
+        music = new Music("res/music.ogg");
 	camera = new Camera(gc, grassMap);
 
 	Blocked.blocked = new boolean[grassMap.getWidth()][grassMap.getHeight()];
@@ -105,6 +108,8 @@ public class BarbarianHorde extends BasicGameState {
         
         ring = new FinalRing(1615, 3133);
 	stuffwin.add(ring);
+        
+        music.loop();
     }
     
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -270,6 +275,7 @@ public class BarbarianHorde extends BasicGameState {
                     d.isvisible = false;
 		}
                 if (d.isvisible && playerguy.hasRing == false) {
+                    sbg.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                     playerguy.x -= 10;
                 }
             }
@@ -308,7 +314,7 @@ public class BarbarianHorde extends BasicGameState {
             if (playerguy.rect.intersects(s.hitbox)) {
 		if (s.isvisible) {
                     makeVisible();
-                    sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                    sbg.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
             }
 	}
