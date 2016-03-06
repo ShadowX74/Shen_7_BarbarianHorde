@@ -46,7 +46,7 @@ public class Sewers extends BasicGameState {
         
         playerguy2 = new Player(642,32);
 	sewerMap = new TiledMap("res/sewers.tmx");
-        music2 = new Music("res/music.ogg");
+        music2 = new Music("res/Fade.ogg");
 	camera = new Camera(gc, sewerMap);
 
 	Blocked2.blocked2 = new boolean[sewerMap.getWidth()][sewerMap.getHeight()];
@@ -126,7 +126,7 @@ public class Sewers extends BasicGameState {
                 playerguy2.sprite.update(delta);
 		playerguy2.y -= fdelta;
             } if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped((float) (playerguy2.x + SIZE + 1.5), playerguy2.y - fdelta)) {
-		playerguy2.health -= 2;
+		playerguy2.health -= 4;
                 System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
 	} else if (input.isKeyDown(Input.KEY_DOWN) || input.isKeyDown(Input.KEY_S)) {
@@ -135,7 +135,7 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.y += fdelta;
             }if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped(playerguy2.x + SIZE - 1, playerguy2.y - fdelta)) {
-		playerguy2.health -= 2;
+		playerguy2.health -= 4;
                 System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
         } else if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_A)) {
@@ -144,7 +144,7 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.x -= fdelta;
             } if (isTrapped(playerguy2.x - fdelta, playerguy2.y) || isTrapped(playerguy2.x - fdelta, playerguy2.y + SIZE - 1)) {
-		playerguy2.health -= 2;
+		playerguy2.health -= 4;
                 System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
 	}
@@ -154,7 +154,7 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.x += fdelta;
             }if (isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y) || isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y + SIZE - 1)) {
-		playerguy2.health -= 2;
+		playerguy2.health -= 4;
                 System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
         }

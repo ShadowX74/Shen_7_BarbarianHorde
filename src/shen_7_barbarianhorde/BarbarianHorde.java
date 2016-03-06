@@ -50,7 +50,7 @@ public class BarbarianHorde extends BasicGameState {
         
         playerguy = new Player(49, 86);
 	grassMap = new TiledMap("res/mydungeon.tmx");
-        music = new Music("res/music.ogg");
+        music = new Music("res/Fade.ogg");
 	camera = new Camera(gc, grassMap);
 
 	Blocked.blocked = new boolean[grassMap.getWidth()][grassMap.getHeight()];
@@ -69,7 +69,7 @@ public class BarbarianHorde extends BasicGameState {
                 int xBlock = (int) xAxis;
                 int yBlock = (int) yAxis;
                 if (!Blocked.blocked[xBlock][yBlock]) {
-                    if (yBlock % 40 == 0 && xBlock % 20 == 0) {
+                    if (yBlock % 40 == 0 && xBlock % 20 == 0 && yBlock < 2000) {
                         Enemy e = new Enemy(xAxis * SIZE, yAxis * SIZE);
                         bosses.add(e);
                     }
@@ -187,15 +187,13 @@ public class BarbarianHorde extends BasicGameState {
             s.move();
         }
 
-	if (input.isKeyDown(Input.KEY_SPACE)) {
+	if (input.isKeyPressed(Input.KEY_SPACE)) {
             if (playerguy.bolts > 0) {
-                if (bolt1.isIsVisible() == false) {
-                    bolt1.setX((int) playerguy.x);
-                    bolt1.setY((int) playerguy.y - 10);
-                    bolt1.setIsVisible(true);
-                    bolt1.setTimeExists(35);
-                    playerguy.bolts -= 1;
-                }
+                bolt1.setX((int) playerguy.x);
+                bolt1.setY((int) playerguy.y - 10);
+                bolt1.setIsVisible(true);
+                bolt1.setTimeExists(35);
+                playerguy.bolts -= 1;
             }
             if (playerguy.sprite == playerguy.right) {
                 bolt1.xmove = 10;
