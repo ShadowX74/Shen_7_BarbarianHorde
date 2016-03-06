@@ -119,32 +119,45 @@ public class Sewers extends BasicGameState {
 //                bolt2.ymove = 10;
 //            }
 //        } else 
-        if (input.isKeyDown(Input.KEY_UP)) {
+        if (input.isKeyDown(Input.KEY_UP) || input.isKeyDown(Input.KEY_W)) {
             playerguy2.sprite = playerguy2.up;
             float fdsc = (float) (fdelta - (SIZE * .15));
             if (!(isBlocked(playerguy2.x, playerguy2.y - fdelta) || isBlocked((float) (playerguy2.x + SIZE + 1.5), playerguy2.y - fdelta))) {
                 playerguy2.sprite.update(delta);
-                playerguy2.y -= fdelta;
+		playerguy2.y -= fdelta;
+            } if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped((float) (playerguy2.x + SIZE + 1.5), playerguy2.y - fdelta)) {
+		playerguy2.health -= 2;
+                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
-	} else if (input.isKeyDown(Input.KEY_DOWN)) {
+	} else if (input.isKeyDown(Input.KEY_DOWN) || input.isKeyDown(Input.KEY_S)) {
             playerguy2.sprite = playerguy2.down;
             if (!isBlocked(playerguy2.x, playerguy2.y + SIZE + fdelta) && !isBlocked(playerguy2.x + SIZE - 1, playerguy2.y + SIZE + fdelta)) {
 		playerguy2.sprite.update(delta);
 		playerguy2.y += fdelta;
+            }if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped(playerguy2.x + SIZE - 1, playerguy2.y - fdelta)) {
+		playerguy2.health -= 2;
+                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
-	} else if (input.isKeyDown(Input.KEY_LEFT)) {
+        } else if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_A)) {
             playerguy2.sprite = playerguy2.left;
             if (!(isBlocked(playerguy2.x - fdelta, playerguy2.y) || isBlocked(playerguy2.x - fdelta, playerguy2.y + SIZE - 1))) {
 		playerguy2.sprite.update(delta);
 		playerguy2.x -= fdelta;
+            } if (isTrapped(playerguy2.x - fdelta, playerguy2.y) || isTrapped(playerguy2.x - fdelta, playerguy2.y + SIZE - 1)) {
+		playerguy2.health -= 2;
+                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
-	} else if (input.isKeyDown(Input.KEY_RIGHT)) {
+	}
+        else if (input.isKeyDown(Input.KEY_RIGHT) || input.isKeyDown(Input.KEY_D)) {
             playerguy2.sprite = playerguy2.right;
             if (cangoright && (!(isBlocked(playerguy2.x + SIZE + fdelta, playerguy2.y) || isBlocked(playerguy2.x + SIZE + fdelta, playerguy2.y + SIZE - 1)))) {
 		playerguy2.sprite.update(delta);
 		playerguy2.x += fdelta;
+            }if (isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y) || isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y + SIZE - 1)) {
+		playerguy2.health -= 2;
+                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
             }
-	}
+        }
 //        if (bolt2.isIsVisible()) {
 //            if (bolt2.getTimeExists() > 0) {
 //                bolt2.setX(bolt2.x += bolt2.xmove);
@@ -158,7 +171,6 @@ public class Sewers extends BasicGameState {
 //        }
         
 	playerguy2.rect.setLocation(playerguy2.getplayershitboxX(), playerguy2.getplayershitboxY());
-                
 
 	playerguy2.time -= counter/1000;
 	if(playerguy2.health <= 0){
@@ -194,50 +206,3 @@ public class Sewers extends BasicGameState {
         }
     }
 }
-//(03:37:46 PM) Crater Cookies:
-//}else if (input.isKeyDown(Input.KEY_UP) || input.isKeyDown(Input.KEY_W)) {
-//			playerguy.sprite = playerguy.up;
-//			float fdsc = (float) (fdelta - (SIZE * .15));
-//			if (!(isBlocked(playerguy.x, playerguy.y - fdelta) || isBlocked((float) (playerguy.x + SIZE + 1.5), playerguy.y - fdelta))) {
-//				playerguy.sprite.update(delta);
-//				playerguy.y -= fdelta;
-//                                
-//			}if (isTrap(playerguy.x, playerguy.y - fdelta) || isTrap((float) (playerguy.x + SIZE + 1.5), playerguy.y - fdelta)) {
-//				playerguy.health -= 4;
-//                                System.out.println("Ouch" + " X:" + playerguy.x + " Y:" + playerguy.y);
-//                            }
-//                }
-//(03:37:59 PM) Crater Cookies:
-//else if (input.isKeyDown(Input.KEY_DOWN) || input.isKeyDown(Input.KEY_S)) {
-//			playerguy.sprite = playerguy.down;
-//			if (!isBlocked(playerguy.x, playerguy.y + SIZE*2 + fdelta) && !isBlocked(playerguy.x + SIZE - 1, playerguy.y + SIZE*2 + fdelta)) {
-//				playerguy.sprite.update(delta);
-//				playerguy.y += fdelta;
-//                        }if (isTrap(playerguy.x, playerguy.y - fdelta) || isTrap(playerguy.x + SIZE - 1, playerguy.y - fdelta)) {
-//				playerguy.health -= 4;
-//                                System.out.println("Ouch" + " X:" + playerguy.x + " Y:" + playerguy.y);
-//                            }
-//		}
-//(03:38:08 PM) Crater Cookies:
-//else if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_A)) {
-//			playerguy.sprite = playerguy.left;
-//                        if (!(isBlocked(playerguy.x - fdelta, playerguy.y) || isBlocked(playerguy.x - fdelta, playerguy.y + SIZE - 1))) {
-//				playerguy.sprite.update(delta);
-//				playerguy.x -= fdelta;
-//                        }if (isTrap(playerguy.x - fdelta, playerguy.y) || isTrap(playerguy.x - fdelta, playerguy.y + SIZE - 1)) {
-//				playerguy.health -= 4;
-//                                System.out.println("Ouch" + " X:" + playerguy.x + " Y:" + playerguy.y);
-//                            }
-//		}
-//(03:38:16 PM) Crater Cookies:
-//else if (input.isKeyDown(Input.KEY_RIGHT) || input.isKeyDown(Input.KEY_D)) {
-//			playerguy.sprite = playerguy.right;
-//                        if (cangoright && (!(isBlocked(playerguy.x + SIZE + fdelta, playerguy.y) || isBlocked(playerguy.x + SIZE + fdelta, playerguy.y + SIZE - 1)))) {
-//				playerguy.sprite.update(delta);
-//				playerguy.x += fdelta;
-//                                
-//			}if (isTrap(playerguy.x + SIZE + fdelta, playerguy.y) || isTrap(playerguy.x + SIZE + fdelta, playerguy.y + SIZE - 1)) {
-//				playerguy.health -= 4;
-//                                System.out.println("Ouch" + " X:" + playerguy.x + " Y:" + playerguy.y);
-//                            }
-//                } 
