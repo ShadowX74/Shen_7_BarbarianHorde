@@ -12,7 +12,7 @@ public class Enemy {
     boolean[][] eblocked = Blocked.getBlocked();
     private Animation skeleton, skup, skdown, skleft, skright, skwait, skdead;
 
-    int SIZE = 64;
+    int SIZE = 32;
     static boolean isAlive = true;
 
     float Bx;
@@ -38,7 +38,7 @@ public class Enemy {
     double rightlimit = (MapWidth * SIZE) - (SIZE * 0.75);
     double downlimit = (MapHeight * SIZE) - (SIZE * 0.75);
 
-    private int startX, startY, width = 28, height = 58;
+    private int startX, startY, width = 24, height = 24;
 
     float hitboxX = this.Bx;
     float hitboxY = this.By;
@@ -66,7 +66,7 @@ public class Enemy {
         this.mydirection = Direction.WAIT;
 
 
-        SpriteSheet skeletonSS = new SpriteSheet("res/evilmagespritesheet.png",64, 64, 0);
+        SpriteSheet skeletonSS = new SpriteSheet("res/evilmagespritesheet.png", 64, 64, 0);
         skup = new Animation();
         skup.setAutoUpdate(true);
         skup.addFrame(skeletonSS.getSprite(0, 8), 330);
@@ -146,12 +146,12 @@ public class Enemy {
 
     private boolean canigoup() {
         fdelta = BarbarianHorde.playerguy.getpdelta();
-        return (!isBlocked(this.Bx, this.By - fdelta) || !isBlocked(this.Bx + SIZE - 1, this.By - fdelta));
+        return (!isBlocked(this.Bx, this.By - fdelta) || !isBlocked((float) (this.Bx + SIZE + 1.5), this.By - fdelta));
     }
 
     private boolean canigodown() {
         fdelta = BarbarianHorde.playerguy.getpdelta();
-        return ((!isBlocked(this.Bx, this.By + SIZE + 8) || !isBlocked(this.Bx + SIZE - 1, this.By + SIZE + fdelta)));
+        return ((!isBlocked(this.Bx, this.By + SIZE * 2 + fdelta) || !isBlocked(this.Bx + SIZE - 1, this.By + SIZE * 2 + fdelta)));
     }
 
     private boolean canigoright() {
@@ -160,7 +160,7 @@ public class Enemy {
 
     private boolean canigoleft() {
         fdelta = BarbarianHorde.playerguy.getpdelta();
-        return (!isBlocked(this.Bx - SIZE / 2, this.By + SIZE / 2) || !isBlocked(this.Bx - SIZE, this.By) || !isBlocked(this.Bx - fdelta, this.By + SIZE - 16));
+        return (!isBlocked(this.Bx + SIZE + fdelta, this.By) || !isBlocked(this.Bx + SIZE + fdelta, this.By + SIZE - 1));
     }
 
 
