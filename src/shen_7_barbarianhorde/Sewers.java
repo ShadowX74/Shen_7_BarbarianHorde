@@ -13,6 +13,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -25,7 +26,8 @@ import org.newdawn.slick.tiled.TiledMap;
  */
 public class Sewers extends BasicGameState {
     static Player playerguy2;
-    static Music music2, hurt;
+    static Music music2;
+    static Sound hurt;
     static FinalStairs finalstair1, finalstair2;
     int preHitTime = 0;
     int newHitTime = 0;
@@ -51,7 +53,7 @@ public class Sewers extends BasicGameState {
         playerguy2 = new Player(663,64);
 	sewerMap = new TiledMap("res/sewers.tmx");
         music2 = new Music("res/Fade.ogg");
-        hurt = new Music("res/ouch.ogg");
+        hurt = new Sound("res/ouch.ogg");
 	camera = new Camera(gc, sewerMap);
 
 	Blocked2.blocked2 = new boolean[sewerMap.getWidth()][sewerMap.getHeight()];
@@ -207,7 +209,9 @@ public class Sewers extends BasicGameState {
     public void keyReleased(int key, char c) {
         switch (key) {
             case Input.KEY_R:
-                
+                Sewers.playerguy2.x = 663f;
+                Sewers.playerguy2.y = 64f;
+                Sewers.playerguy2.health = 100;
                 break;
             
             default:

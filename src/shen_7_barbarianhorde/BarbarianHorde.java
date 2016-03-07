@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -23,7 +24,8 @@ public class BarbarianHorde extends BasicGameState {
     static Gate gate1, gate2, descend1, descend2;
     static Stairs stair1, stair2;
     static Player playerguy;
-    static Music music, firing;
+    static Music music;
+    static Sound firing;
 
     public ArrayList<FinalRing> stuffwin = new ArrayList();
     public ArrayList<Gate> gates = new ArrayList();
@@ -51,7 +53,7 @@ public class BarbarianHorde extends BasicGameState {
         playerguy = new Player(49, 86);
 	grassMap = new TiledMap("res/mydungeon.tmx");
         music = new Music("res/Fade.ogg");
-        firing = new Music("res/fire.ogg");
+        firing = new Sound("res/fire.ogg");
 	camera = new Camera(gc, grassMap);
 
 	Blocked.blocked = new boolean[grassMap.getWidth()][grassMap.getHeight()];
