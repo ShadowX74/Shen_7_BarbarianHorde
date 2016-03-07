@@ -65,7 +65,12 @@ public class Win extends BasicGameState {
                 BarbarianHorde.descend2.isvisible = true;
                 BarbarianHorde.playerguy.hasKey = false;
                 BarbarianHorde.playerguy.hasRing = false;
-                game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                
+                Sewers.playerguy2.x = 663f;
+                Sewers.playerguy2.y = 64f;
+                Sewers.playerguy2.health = 100;
+                
+                game.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             
             default:

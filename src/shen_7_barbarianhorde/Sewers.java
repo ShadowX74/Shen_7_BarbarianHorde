@@ -24,9 +24,11 @@ import org.newdawn.slick.tiled.TiledMap;
  * @author ShadowX
  */
 public class Sewers extends BasicGameState {
-//    Bolts bolt2;
     static Player playerguy2;
-    static Music music2;
+    static Music music2, hurt;
+    static FinalStairs finalstair1, finalstair2;
+    
+    public ArrayList<FinalStairs> stairs = new ArrayList();
     
     private static TiledMap sewerMap;
     private static AppGameContainer app;
@@ -44,9 +46,10 @@ public class Sewers extends BasicGameState {
         gc.setTargetFrameRate(60);
         gc.setShowFPS(false);
         
-        playerguy2 = new Player(642,32);
+        playerguy2 = new Player(663,64);
 	sewerMap = new TiledMap("res/sewers.tmx");
         music2 = new Music("res/Fade.ogg");
+        hurt = new Music("res/ouch.ogg");
 	camera = new Camera(gc, sewerMap);
 
 	Blocked2.blocked2 = new boolean[sewerMap.getWidth()][sewerMap.getHeight()];
@@ -72,6 +75,11 @@ public class Sewers extends BasicGameState {
 	}
         
         music2.loop();
+        
+        finalstair1 = new FinalStairs(2976,3104);
+        finalstair2 = new FinalStairs(2976,3136);
+        stairs.add(finalstair1);
+        stairs.add(finalstair2);
     }
     
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -82,7 +90,11 @@ public class Sewers extends BasicGameState {
 	playerguy2.sprite.draw((int) playerguy2.x, (int) playerguy2.y);
 	g.drawString("Health: " + (int)(playerguy2.health), camera.cameraX + 10, camera.cameraY + 10);
         
-        g.drawString("x: " + (int)playerguy2.x + "y: " +(int)playerguy2.y ,playerguy2.x, playerguy2.y - 10);
+        for (FinalStairs s : stairs) {
+            if (s.isvisible) {
+                s.currentImage.draw(s.x, s.y);
+            }
+        }
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -95,39 +107,21 @@ public class Sewers extends BasicGameState {
 	float projectedright = playerguy2.x + fdelta + SIZE;
 	boolean cangoright = projectedright < rightlimit;
 
-//	if (input.isKeyDown(Input.KEY_SPACE)) {
-//            if (playerguy2.bolts > 0) {
-//                if (bolt2.isIsVisible() == false) {
-//                    bolt2.setX((int) playerguy2.x);
-//                    bolt2.setY((int) playerguy2.y - 10);
-//                    bolt2.setIsVisible(true);
-//                    bolt2.setTimeExists(35);
-//                    playerguy2.bolts -= 1;
-//                }
-//            }
-//            if (playerguy2.sprite == playerguy2.right) {
-//                bolt2.xmove = 10;
-//                bolt2.ymove = 0;
-//            } else if (playerguy2.sprite == playerguy2.left) {
-//                bolt2.xmove = -10;
-//                bolt2.ymove = 0;
-//            } else if (playerguy2.sprite == playerguy2.up) {
-//                bolt2.xmove = 0;
-//                bolt2.ymove = -10;
-//            } else if (playerguy2.sprite == playerguy2.down) {
-//                bolt2.xmove = 0;
-//                bolt2.ymove = 10;
-//            }
-//        } else 
-        if (input.isKeyDown(Input.KEY_UP) || input.isKeyDown(Input.KEY_W)) {
+        if (input.isKeyPressed(Input.KEY_M)) {
+            if (music2.playing()) {
+                music2.pause();
+            } else {
+                music2.loop();
+            }
+        } else if (input.isKeyDown(Input.KEY_UP) || input.isKeyDown(Input.KEY_W)) {
             playerguy2.sprite = playerguy2.up;
             float fdsc = (float) (fdelta - (SIZE * .15));
             if (!(isBlocked(playerguy2.x, playerguy2.y - fdelta) || isBlocked((float) (playerguy2.x + SIZE + 1.5), playerguy2.y - fdelta))) {
                 playerguy2.sprite.update(delta);
 		playerguy2.y -= fdelta;
             } if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped((float) (playerguy2.x + SIZE + 1.5), playerguy2.y - fdelta)) {
-		playerguy2.health -= 4;
-                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
+		playerguy2.health -= 2;
+                hurt.play();
             }
 	} else if (input.isKeyDown(Input.KEY_DOWN) || input.isKeyDown(Input.KEY_S)) {
             playerguy2.sprite = playerguy2.down;
@@ -135,8 +129,8 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.y += fdelta;
             }if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped(playerguy2.x + SIZE - 1, playerguy2.y - fdelta)) {
-		playerguy2.health -= 4;
-                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
+		playerguy2.health -= 2;
+                hurt.play();
             }
         } else if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_A)) {
             playerguy2.sprite = playerguy2.left;
@@ -144,8 +138,8 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.x -= fdelta;
             } if (isTrapped(playerguy2.x - fdelta, playerguy2.y) || isTrapped(playerguy2.x - fdelta, playerguy2.y + SIZE - 1)) {
-		playerguy2.health -= 4;
-                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
+		playerguy2.health -= 2;
+                hurt.play();
             }
 	}
         else if (input.isKeyDown(Input.KEY_RIGHT) || input.isKeyDown(Input.KEY_D)) {
@@ -154,27 +148,24 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.x += fdelta;
             }if (isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y) || isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y + SIZE - 1)) {
-		playerguy2.health -= 4;
-                System.out.println("Ouch" + " X:" + playerguy2.x + " Y:" + playerguy2.y);
+		playerguy2.health -= 2;
+                hurt.play();
             }
         }
-//        if (bolt2.isIsVisible()) {
-//            if (bolt2.getTimeExists() > 0) {
-//                bolt2.setX(bolt2.x += bolt2.xmove);
-//                bolt2.setY(bolt2.y += bolt2.ymove);
-//                bolt2.hitbox.setX(bolt2.getX());
-//                bolt2.hitbox.setY(bolt2.getY());
-//                bolt2.countdown();
-//            } else {
-//                bolt2.setIsVisible(false);
-//            }
-//        }
         
 	playerguy2.rect.setLocation(playerguy2.getplayershitboxX(), playerguy2.getplayershitboxY());
 
+        for (FinalStairs s : stairs) {
+            if (playerguy2.rect.intersects(s.hitbox)) {
+		if (s.isvisible) {
+                    sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		}
+            }
+	}
+                
 	playerguy2.time -= counter/1000;
 	if(playerguy2.health <= 0){
-            sbg.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+            sbg.enterState(5, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
     }
 

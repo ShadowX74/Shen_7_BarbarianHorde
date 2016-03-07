@@ -23,7 +23,7 @@ public class BarbarianHorde extends BasicGameState {
     static Gate gate1, gate2, descend1, descend2;
     static Stairs stair1, stair2;
     static Player playerguy;
-    static Music music;
+    static Music music, firing;
 
     public ArrayList<FinalRing> stuffwin = new ArrayList();
     public ArrayList<Gate> gates = new ArrayList();
@@ -51,6 +51,7 @@ public class BarbarianHorde extends BasicGameState {
         playerguy = new Player(49, 86);
 	grassMap = new TiledMap("res/mydungeon.tmx");
         music = new Music("res/Fade.ogg");
+        firing = new Music("res/fire.ogg");
 	camera = new Camera(gc, grassMap);
 
 	Blocked.blocked = new boolean[grassMap.getWidth()][grassMap.getHeight()];
@@ -121,8 +122,6 @@ public class BarbarianHorde extends BasicGameState {
 	g.drawString("Bolts left: " + playerguy.bolts, camera.cameraX + 150, camera.cameraY + 10);
 	g.drawString("Health: " + (int)(playerguy.health), camera.cameraX + 10, camera.cameraY + 10);
         
-        g.drawString("x: " + (int)playerguy.x + "y: " +(int)playerguy.y ,playerguy.x, playerguy.y - 10);
-        
         if (bolt1.isIsVisible()) {
             bolt1.boltpic.draw(bolt1.getX(), bolt1.getY());
         }
@@ -189,6 +188,7 @@ public class BarbarianHorde extends BasicGameState {
 
 	if (input.isKeyPressed(Input.KEY_SPACE)) {
             if (playerguy.bolts > 0) {
+                firing.play();
                 bolt1.setX((int) playerguy.x);
                 bolt1.setY((int) playerguy.y - 10);
                 bolt1.setIsVisible(true);
@@ -207,6 +207,12 @@ public class BarbarianHorde extends BasicGameState {
             } else if (playerguy.sprite == playerguy.down) {
                 bolt1.xmove = 0;
                 bolt1.ymove = 10;
+            }
+        } else if (input.isKeyPressed(Input.KEY_M)) {
+            if (music.playing()) {
+                music.pause();
+            } else {
+                music.loop();
             }
         } else if (input.isKeyDown(Input.KEY_UP)) {
             playerguy.sprite = playerguy.up;
@@ -273,7 +279,6 @@ public class BarbarianHorde extends BasicGameState {
                     d.isvisible = false;
 		}
                 if (d.isvisible && playerguy.hasRing == false) {
-                    sbg.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                     playerguy.x -= 10;
                 }
             }
@@ -312,7 +317,7 @@ public class BarbarianHorde extends BasicGameState {
             if (playerguy.rect.intersects(s.hitbox)) {
 		if (s.isvisible) {
                     makeVisible();
-                    sbg.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                    sbg.enterState(6, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 		}
             }
 	}
@@ -345,6 +350,7 @@ public class BarbarianHorde extends BasicGameState {
         switch (key) {
             case Input.KEY_R:
                 makeVisible();
+                music.loop();
                 playerguy.bolts  = 20;
                 playerguy.speed = .4f;
                 playerguy.health = 100;

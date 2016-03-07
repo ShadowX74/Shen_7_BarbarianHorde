@@ -65,10 +65,6 @@ public class Lose extends BasicGameState {
                 BarbarianHorde.descend2.isvisible = true;
                 BarbarianHorde.playerguy.hasKey = false;
                 BarbarianHorde.playerguy.hasRing = false;
-                
-                Sewers.playerguy2.x = 642f;
-                Sewers.playerguy2.y = 32f;
-                Sewers.playerguy2.health = 100;
                 game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             
