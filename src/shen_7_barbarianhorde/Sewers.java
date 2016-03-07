@@ -27,6 +27,8 @@ public class Sewers extends BasicGameState {
     static Player playerguy2;
     static Music music2, hurt;
     static FinalStairs finalstair1, finalstair2;
+    int preHitTime = 0;
+    int newHitTime = 0;
     
     public ArrayList<FinalStairs> stairs = new ArrayList();
     
@@ -120,8 +122,12 @@ public class Sewers extends BasicGameState {
                 playerguy2.sprite.update(delta);
 		playerguy2.y -= fdelta;
             } if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped((float) (playerguy2.x + SIZE + 1.5), playerguy2.y - fdelta)) {
-		playerguy2.health -= 2;
-                hurt.play();
+		newHitTime = (int) System.currentTimeMillis();
+                if (newHitTime - preHitTime >= 250) {
+                    playerguy2.health -= 10;
+                    preHitTime = newHitTime;
+                    hurt.play();
+                }
             }
 	} else if (input.isKeyDown(Input.KEY_DOWN) || input.isKeyDown(Input.KEY_S)) {
             playerguy2.sprite = playerguy2.down;
@@ -129,8 +135,12 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.y += fdelta;
             }if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped(playerguy2.x + SIZE - 1, playerguy2.y - fdelta)) {
-		playerguy2.health -= 2;
-                hurt.play();
+		newHitTime = (int) System.currentTimeMillis();
+                if (newHitTime - preHitTime >= 250) {
+                    playerguy2.health -= 10;
+                    preHitTime = newHitTime;
+                    hurt.play();
+                }
             }
         } else if (input.isKeyDown(Input.KEY_LEFT) || input.isKeyDown(Input.KEY_A)) {
             playerguy2.sprite = playerguy2.left;
@@ -138,8 +148,12 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.x -= fdelta;
             } if (isTrapped(playerguy2.x - fdelta, playerguy2.y) || isTrapped(playerguy2.x - fdelta, playerguy2.y + SIZE - 1)) {
-		playerguy2.health -= 2;
-                hurt.play();
+		newHitTime = (int) System.currentTimeMillis();
+                if (newHitTime - preHitTime >= 250) {
+                    playerguy2.health -= 10;
+                    preHitTime = newHitTime;
+                    hurt.play();
+                }
             }
 	}
         else if (input.isKeyDown(Input.KEY_RIGHT) || input.isKeyDown(Input.KEY_D)) {
@@ -148,8 +162,12 @@ public class Sewers extends BasicGameState {
 		playerguy2.sprite.update(delta);
 		playerguy2.x += fdelta;
             }if (isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y) || isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y + SIZE - 1)) {
-		playerguy2.health -= 2;
-                hurt.play();
+		newHitTime = (int) System.currentTimeMillis();
+                if (newHitTime - preHitTime >= 250) {
+                    playerguy2.health -= 10;
+                    preHitTime = newHitTime;
+                    hurt.play();
+                }
             }
         }
         

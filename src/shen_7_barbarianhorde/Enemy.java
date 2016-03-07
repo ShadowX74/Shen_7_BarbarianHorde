@@ -146,12 +146,12 @@ public class Enemy {
 
     private boolean canigoup() {
         fdelta = BarbarianHorde.playerguy.getpdelta();
-        return (!isBlocked(this.Bx, this.By - fdelta) || !isBlocked((float) (this.Bx + SIZE + 1.5), this.By - fdelta));
+        return (!isBlocked(this.Bx, this.By - fdelta) || !isBlocked(this.Bx + SIZE - 1, this.By - fdelta));
     }
 
     private boolean canigodown() {
         fdelta = BarbarianHorde.playerguy.getpdelta();
-        return ((!isBlocked(this.Bx, this.By + SIZE * 2 + fdelta) || !isBlocked(this.Bx + SIZE - 1, this.By + SIZE * 2 + fdelta)));
+        return ((!isBlocked(this.Bx, this.By + SIZE + 8) || !isBlocked(this.Bx + SIZE - 1, this.By + SIZE + fdelta)));
     }
 
     private boolean canigoright() {
@@ -160,7 +160,7 @@ public class Enemy {
 
     private boolean canigoleft() {
         fdelta = BarbarianHorde.playerguy.getpdelta();
-        return (!isBlocked(this.Bx + SIZE + fdelta, this.By) || !isBlocked(this.Bx + SIZE + fdelta, this.By + SIZE - 1));
+        return (!isBlocked(this.Bx - SIZE / 2, this.By + SIZE / 2) || !isBlocked(this.Bx - SIZE, this.By) || !isBlocked(this.Bx - fdelta, this.By + SIZE - 16));
     }
 
 
