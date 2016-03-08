@@ -21,8 +21,8 @@ public class Camera {
         this.numTilesY = map.getHeight();
         this.tileWidth = map.getTileWidth();
         this.tileHeight = map.getTileHeight();
-        this.mapHeight = this.numTilesX * this.tileWidth;
-        this.mapWidth = this.numTilesY * this.tileHeight;
+        this.mapWidth = this.numTilesX * this.tileWidth;
+        this.mapHeight = this.numTilesY * this.tileHeight;
         this.gc = gc;
    }
 

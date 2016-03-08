@@ -32,13 +32,13 @@ public class Enemy {
     Animation currentanime = new Animation();
     private float fdelta;
 
-    int MapWidth = 50;
+    int MapWidth = 100;
     int MapHeight = 100;
 
     double rightlimit = (MapWidth * SIZE) - (SIZE * 0.75);
     double downlimit = (MapHeight * SIZE) - (SIZE * 0.75);
 
-    private int startX, startY, width = 24, height = 24;
+    private int startX, startY, width = 28, height = 58;
 
     float hitboxX = this.Bx;
     float hitboxY = this.By;
@@ -56,7 +56,7 @@ public class Enemy {
         By = b;
         hitboxX = this.getskhitboxX();
         hitboxY = this.getskhitboxY();
-        rect = new Rectangle(hitboxX, hitboxY, width, height);
+        rect = new Rectangle(hitboxX - 4, hitboxY - 4, width, height);
 
         canmove = true;
 

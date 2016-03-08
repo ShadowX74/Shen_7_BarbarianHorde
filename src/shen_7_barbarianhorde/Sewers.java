@@ -125,7 +125,7 @@ public class Sewers extends BasicGameState {
 		playerguy2.y -= fdelta;
             } if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped((float) (playerguy2.x + SIZE + 1.5), playerguy2.y - fdelta)) {
 		newHitTime = (int) System.currentTimeMillis();
-                if (newHitTime - preHitTime >= 250) {
+                if (newHitTime - preHitTime >= 150) {
                     playerguy2.health -= 10;
                     preHitTime = newHitTime;
                     hurt.play();
@@ -138,7 +138,7 @@ public class Sewers extends BasicGameState {
 		playerguy2.y += fdelta;
             }if (isTrapped(playerguy2.x, playerguy2.y - fdelta) || isTrapped(playerguy2.x + SIZE - 1, playerguy2.y - fdelta)) {
 		newHitTime = (int) System.currentTimeMillis();
-                if (newHitTime - preHitTime >= 250) {
+                if (newHitTime - preHitTime >= 150) {
                     playerguy2.health -= 10;
                     preHitTime = newHitTime;
                     hurt.play();
@@ -151,7 +151,7 @@ public class Sewers extends BasicGameState {
 		playerguy2.x -= fdelta;
             } if (isTrapped(playerguy2.x - fdelta, playerguy2.y) || isTrapped(playerguy2.x - fdelta, playerguy2.y + SIZE - 1)) {
 		newHitTime = (int) System.currentTimeMillis();
-                if (newHitTime - preHitTime >= 250) {
+                if (newHitTime - preHitTime >= 150) {
                     playerguy2.health -= 10;
                     preHitTime = newHitTime;
                     hurt.play();
@@ -165,7 +165,7 @@ public class Sewers extends BasicGameState {
 		playerguy2.x += fdelta;
             }if (isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y) || isTrapped(playerguy2.x + SIZE + fdelta, playerguy2.y + SIZE - 1)) {
 		newHitTime = (int) System.currentTimeMillis();
-                if (newHitTime - preHitTime >= 250) {
+                if (newHitTime - preHitTime >= 150) {
                     playerguy2.health -= 10;
                     preHitTime = newHitTime;
                     hurt.play();
