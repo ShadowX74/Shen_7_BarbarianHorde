@@ -19,6 +19,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.tiled.TiledMap;
+import static shen_7_barbarianhorde.BarbarianHorde.music;
 
 /**
  *
@@ -26,7 +27,6 @@ import org.newdawn.slick.tiled.TiledMap;
  */
 public class Sewers extends BasicGameState {
     static Player playerguy2;
-    static Music music2;
     static Sound hurt;
     static FinalStairs finalstair1, finalstair2;
     int preHitTime = 0;
@@ -52,7 +52,6 @@ public class Sewers extends BasicGameState {
         
         playerguy2 = new Player(663,64);
 	sewerMap = new TiledMap("res/sewers.tmx");
-        music2 = new Music("res/Fade.ogg");
         hurt = new Sound("res/ouch.ogg");
 	camera = new Camera(gc, sewerMap);
 
@@ -77,8 +76,6 @@ public class Sewers extends BasicGameState {
 		}
             }
 	}
-        
-        music2.loop();
         
         finalstair1 = new FinalStairs(2976,3104);
         finalstair2 = new FinalStairs(2976,3136);
@@ -112,10 +109,10 @@ public class Sewers extends BasicGameState {
 	boolean cangoright = projectedright < rightlimit;
 
         if (input.isKeyPressed(Input.KEY_M)) {
-            if (music2.playing()) {
-                music2.pause();
+            if (music.playing()) {
+                music.pause();
             } else {
-                music2.loop();
+                music.resume();
             }
         } else if (input.isKeyDown(Input.KEY_UP) || input.isKeyDown(Input.KEY_W)) {
             playerguy2.sprite = playerguy2.up;

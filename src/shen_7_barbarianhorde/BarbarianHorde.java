@@ -214,7 +214,7 @@ public class BarbarianHorde extends BasicGameState {
             if (music.playing()) {
                 music.pause();
             } else {
-                music.loop();
+                music.resume();
             }
         } else if (input.isKeyDown(Input.KEY_UP)) {
             playerguy.sprite = playerguy.up;
@@ -241,7 +241,10 @@ public class BarbarianHorde extends BasicGameState {
 		playerguy.sprite.update(delta);
 		playerguy.x += fdelta;
             }
-	}
+	} else if (input.isKeyDown(Input.KEY_0)) {
+            sbg.enterState(6, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+        }
+        
         if (bolt1.isIsVisible()) {
             if (bolt1.getTimeExists() > 0) {
                 bolt1.setX(bolt1.x += bolt1.xmove);
